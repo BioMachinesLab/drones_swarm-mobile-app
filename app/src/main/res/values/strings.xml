@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Drones_swarm-mobile-app</string>
+
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
+    <string name="title_main_activity">Operations</string>
+    <string name="title_activity_second">SecondActivity</string>
+</resources>
