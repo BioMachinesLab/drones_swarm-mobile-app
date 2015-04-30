@@ -504,6 +504,7 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		// Pass any configuration change to the drawer toggles
+        //
 		mDrawerToggleLeftMenu.onConfigurationChanged(newConfig);
         mDrawerToggleRightMenu.onConfigurationChanged(newConfig);
 	}
