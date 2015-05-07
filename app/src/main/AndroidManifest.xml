@@ -27,12 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/title_main_activity" >
         </activity>
-
         <activity
             android:name=".Activities.SecondActivity"
             android:label="@string/title_activity_second" >
@@ -45,7 +43,10 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
-
+        <activity
+            android:name=".Activities.AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
     </application>
 
 </manifest>
