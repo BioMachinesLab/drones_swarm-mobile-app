@@ -330,47 +330,6 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      //  ImageButton buttonleftcontrol1 = (ImageButton) findViewById(R.id.button_left_control1);
-      //  ImageButton buttonleftcontrol2 = (ImageButton) findViewById(R.id.button_left_control2);
-
-      //  ImageButton buttonrightcontrol1 = (ImageButton) findViewById(R.id.button_right_control1);
-      //  ImageButton buttonrightcontrol2 = (ImageButton) findViewById(R.id.button_right_control2);
-
-      //  buttonleftcontrol1.setOnClickListener(new View.OnClickListener() {
-      //      public void onClick(View v) {
-      //          Toast.makeText(MainActivity.this,"Entrei buttonleftcontrol1 ",Toast.LENGTH_SHORT).show();
-      //      }
-      //  });
-      //  buttonleftcontrol2.setOnClickListener(new View.OnClickListener() {
-      //      public void onClick(View v) {
-      //          Toast.makeText(MainActivity.this,"Entrei buttonleftcontrol2 ",Toast.LENGTH_SHORT).show();
-      //      }
-      //  });
-
-        //buttonrightcontrol1.setOnClickListener(new View.OnClickListener() {
-        //    public void onClick(View v) {
-          //      Toast.makeText(MainActivity.this,"Entrei buttonrightcontrol1 ",Toast.LENGTH_SHORT).show();
-          //  }
-        //});
-        //buttonrightcontrol2.setOnClickListener(new View.OnClickListener() {
-          //  public void onClick(View v) {
-            //    Toast.makeText(MainActivity.this,"Entrei buttonrightcontrol2 ",Toast.LENGTH_SHORT).show();
-           // }
-        //});
     }
 
     @Override
