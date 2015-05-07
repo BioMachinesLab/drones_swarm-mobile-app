@@ -9,4 +9,5 @@
     <string name="drawer_close">Close drawer</string>
     <string name="title_main_activity">Operations</string>
     <string name="title_activity_second">SecondActivity</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

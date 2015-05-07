@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -54,6 +56,9 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
     private boolean isOpenRightMenu = false;
     //Google Maps
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    //Control
+    private int value_left_control,value_right_control = 0;
+    private SeekBar seekBar_left_control1,seekBar_left_control2,seekBar_right_control1,seekBar_right_control2;
 
 
 	@Override
@@ -225,34 +230,147 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
     }
 
     private void actionButtonsControl(){
-        ImageButton buttonleftcontrol1 = (ImageButton) findViewById(R.id.button_left_control1);
-        ImageButton buttonleftcontrol2 = (ImageButton) findViewById(R.id.button_left_control2);
 
-        ImageButton buttonrightcontrol1 = (ImageButton) findViewById(R.id.button_right_control1);
-        ImageButton buttonrightcontrol2 = (ImageButton) findViewById(R.id.button_right_control2);
+        //LEFT CONTROL
+          seekBar_left_control1 = (SeekBar) findViewById(R.id.seekbar_left_control1);
+          seekBar_left_control2 = (SeekBar) findViewById(R.id.seekbar_left_control2);
 
-        buttonleftcontrol1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"Entrei buttonleftcontrol1 ",Toast.LENGTH_SHORT).show();
+        final TextView textView_left_control = (TextView)findViewById(R.id.textview_left_control1);
+        textView_left_control.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+
+        seekBar_left_control1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                seekBar_left_control2.setProgress(0);
+                value_left_control = progress - 100;
+                textView_left_control.setText("Left Control \n"+String.valueOf(value_left_control)+ "%");
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
-        buttonleftcontrol2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"Entrei buttonleftcontrol2 ",Toast.LENGTH_SHORT).show();
+        seekBar_left_control2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                seekBar_left_control1.setProgress(100);
+                value_left_control = progress;
+                textView_left_control.setText("Left Control \n"+String.valueOf(value_left_control) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        //RIGHT CONTROL
+
+        seekBar_right_control1 = (SeekBar) findViewById(R.id.seekbar_right_control1);
+        seekBar_right_control2 = (SeekBar) findViewById(R.id.seekbar_right_control2);
+
+        final TextView textView_right_control = (TextView)findViewById(R.id.textview_right_control1);
+        textView_right_control.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+
+        seekBar_right_control1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                seekBar_right_control2.setProgress(0);
+                value_right_control = progress - 100;
+                textView_right_control.setText("Right Control \n"+String.valueOf(value_right_control)+ "%");
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        seekBar_right_control2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                seekBar_right_control1.setProgress(100);
+                value_right_control = progress;
+                textView_right_control.setText("Right Control \n"+String.valueOf(value_right_control) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 
 
-        buttonrightcontrol1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"Entrei buttonrightcontrol1 ",Toast.LENGTH_SHORT).show();
-            }
-        });
-        buttonrightcontrol2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"Entrei buttonrightcontrol2 ",Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+      //  ImageButton buttonleftcontrol1 = (ImageButton) findViewById(R.id.button_left_control1);
+      //  ImageButton buttonleftcontrol2 = (ImageButton) findViewById(R.id.button_left_control2);
+
+      //  ImageButton buttonrightcontrol1 = (ImageButton) findViewById(R.id.button_right_control1);
+      //  ImageButton buttonrightcontrol2 = (ImageButton) findViewById(R.id.button_right_control2);
+
+      //  buttonleftcontrol1.setOnClickListener(new View.OnClickListener() {
+      //      public void onClick(View v) {
+      //          Toast.makeText(MainActivity.this,"Entrei buttonleftcontrol1 ",Toast.LENGTH_SHORT).show();
+      //      }
+      //  });
+      //  buttonleftcontrol2.setOnClickListener(new View.OnClickListener() {
+      //      public void onClick(View v) {
+      //          Toast.makeText(MainActivity.this,"Entrei buttonleftcontrol2 ",Toast.LENGTH_SHORT).show();
+      //      }
+      //  });
+
+        //buttonrightcontrol1.setOnClickListener(new View.OnClickListener() {
+        //    public void onClick(View v) {
+          //      Toast.makeText(MainActivity.this,"Entrei buttonrightcontrol1 ",Toast.LENGTH_SHORT).show();
+          //  }
+        //});
+        //buttonrightcontrol2.setOnClickListener(new View.OnClickListener() {
+          //  public void onClick(View v) {
+            //    Toast.makeText(MainActivity.this,"Entrei buttonrightcontrol2 ",Toast.LENGTH_SHORT).show();
+           // }
+        //});
     }
 
     @Override

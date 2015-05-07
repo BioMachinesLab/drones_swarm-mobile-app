@@ -16,75 +16,124 @@
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/map" android:layout_marginBottom="100dp"
-            tools:context="pt.iscte.daam.MapsActivity"
+            tools:context="pt.iscte.drones_swarm_mobile_app.Activities.MainActivity"
             android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-
-
-        <!--   Left Control  -->
-        <ImageView
-            android:layout_width="139dp"
-            android:layout_height="75dp"
-            android:id="@+id/imageView2"
-            android:layout_marginLeft="-190dp"
-            android:layout_marginBottom="1dp"
-            android:src="@drawable/controlbackground"
-            android:layout_gravity="center_horizontal|bottom" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="650dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/control2"
-            android:id="@+id/button_left_control2"
-            android:layout_marginLeft="-125dp"
-            android:background="?android:selectableItemBackground"
-            android:layout_gravity="center_horizontal|bottom" />
+            android:layout_gravity="left|bottom"
+            android:weightSum="1"
+            android:gravity="left">
 
-        <ImageButton
-            android:layout_width="wrap_content"
+            <SeekBar
+                    android:id="@+id/seekbar_left_control1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="100"
+                    android:progressDrawable="@drawable/splashscreen"
+                    android:thumb="@drawable/control1"
+                    android:layout_weight="0.5"/>
+
+            <FrameLayout
+               android:orientation="vertical"
+                android:layout_width="139dp"
+                android:layout_height="75dp"
+               >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView2"
+                    android:src="@drawable/controlbackground" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Left Control \n 0%"
+                    android:layout_gravity="center"
+                    android:id="@+id/textview_left_control1"
+                    android:autoText="false"
+                    android:textSize="20dp" />
+
+            </FrameLayout>
+
+            <SeekBar
+                    android:id="@+id/seekbar_left_control2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/splashscreen"
+                    android:thumb="@drawable/control2"
+                    android:layout_weight="0.5" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="-255dp"
-            android:id="@+id/button_left_control1"
-            android:src="@drawable/control1"
+            android:layout_marginRight="0dp"
+            android:layout_gravity="right|bottom"
+            android:weightSum="1"
+            android:gravity="right">
 
-            android:background="?android:selectableItemBackground"
-            android:layout_gravity="center_horizontal|bottom" />
+            <SeekBar
+                android:id="@+id/seekbar_right_control1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/splashscreen"
+                android:thumb="@drawable/control1"
+                android:layout_weight="0.5" />
 
-        <!--   Right Control  -->
-        <ImageView
-            android:layout_width="139dp"
-            android:layout_height="75dp"
-            android:id="@+id/imageView3"
-            android:layout_marginLeft="180dp"
-            android:layout_marginBottom="1dp"
-            android:src="@drawable/controlbackground"
-            android:layout_gravity="center_horizontal|bottom" />
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="139dp"
+                android:layout_height="75dp"
+                >
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/control2"
-            android:id="@+id/button_right_control2"
-            android:layout_marginLeft="255dp"
-            android:background="?android:selectableItemBackground"
-            android:layout_gravity="center_horizontal|bottom" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView22"
+                    android:src="@drawable/controlbackground" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="115dp"
-            android:id="@+id/button_right_control1"
-            android:src="@drawable/control1"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Right Control \n 0%"
+                    android:layout_gravity="center"
+                    android:id="@+id/textview_right_control1"
+                    android:autoText="false"
+                    android:textSize="20dp" />
 
-            android:background="?android:selectableItemBackground"
-            android:layout_gravity="center_horizontal|bottom" />
+            </FrameLayout>
+
+            <SeekBar
+                android:id="@+id/seekbar_right_control2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/splashscreen"
+                android:thumb="@drawable/control2"
+                android:layout_weight="0.5"/>
+
+
+        </LinearLayout>
+
+
+
 
     </FrameLayout>
-
-
-
-
-
 
 
        <!-- android:layout_gravity="start" tells DrawerLayout to treat
