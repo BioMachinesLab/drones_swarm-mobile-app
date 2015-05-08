@@ -92,25 +92,30 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
         // Add Drawer Item to dataList
         dataListLeftMenu.add(new DrawerItem(true)); // adding a spinner to the list
 
-        dataListLeftMenu.add(new DrawerItem("My FavoritesL")); // adding a header to the list
-        dataListLeftMenu.add(new DrawerItem("MessageL", R.drawable.ic_action_email));
-        dataListLeftMenu.add(new DrawerItem("LikesL", R.drawable.ic_action_good));
-        dataListLeftMenu.add(new DrawerItem("GamesL", R.drawable.ic_action_gamepad));
-        dataListLeftMenu.add(new DrawerItem("LablesL", R.drawable.ic_action_labels));
+        dataListLeftMenu.add(new DrawerItem("Battery Status")); // adding a header to the list
+        dataListLeftMenu.add(new DrawerItem("Battery 1", R.drawable.ic_action_email));
+        dataListLeftMenu.add(new DrawerItem("Battery 2", R.drawable.ic_action_good));
+        dataListLeftMenu.add(new DrawerItem("Battery 3", R.drawable.ic_action_gamepad));
 
-        dataListLeftMenu.add(new DrawerItem("Main OptionsL"));// adding a header to the list
-        dataListLeftMenu.add(new DrawerItem("SearchL", R.drawable.ic_action_search));
-        dataListLeftMenu.add(new DrawerItem("CloudL", R.drawable.ic_action_cloud));
-        dataListLeftMenu.add(new DrawerItem("CamaraL", R.drawable.ic_action_camera));
-        dataListLeftMenu.add(new DrawerItem("VideoL", R.drawable.ic_action_video));
-        dataListLeftMenu.add(new DrawerItem("GroupsL", R.drawable.ic_action_group));
-        dataListLeftMenu.add(new DrawerItem("Import & ExportL",
-                R.drawable.ic_action_import_export));
 
-        dataListLeftMenu.add(new DrawerItem("Other OptionL")); // adding a header to the list
-        dataListLeftMenu.add(new DrawerItem("AboutL", R.drawable.ic_action_about));
-        dataListLeftMenu.add(new DrawerItem("SettingsL", R.drawable.ic_action_settings));
-        dataListLeftMenu.add(new DrawerItem("HelpL", R.drawable.ic_action_help));
+        dataListLeftMenu.add(new DrawerItem("GPS Data"));// adding a header to the list
+        dataListLeftMenu.add(new DrawerItem("Has Fix", R.drawable.ic_action_search));
+        dataListLeftMenu.add(new DrawerItem("Latitude", R.drawable.ic_action_cloud));
+        dataListLeftMenu.add(new DrawerItem("Longitude", R.drawable.ic_action_camera));
+        dataListLeftMenu.add(new DrawerItem("Vel.(Km/h)", R.drawable.ic_action_video));
+        dataListLeftMenu.add(new DrawerItem("Time", R.drawable.ic_action_group));
+        dataListLeftMenu.add(new DrawerItem("Sat. View", R.drawable.ic_action_import_export));
+        dataListLeftMenu.add(new DrawerItem("Sat. Used", R.drawable.ic_action_import_export));
+        dataListLeftMenu.add(new DrawerItem("HDOP", R.drawable.ic_action_import_export));
+        dataListLeftMenu.add(new DrawerItem("PDOP", R.drawable.ic_action_import_export));
+        dataListLeftMenu.add(new DrawerItem("VDOP", R.drawable.ic_action_import_export));
+
+        dataListLeftMenu.add(new DrawerItem("Refresh Rate")); // adding a header to the list
+        dataListLeftMenu.add(new DrawerItem("Details", R.drawable.ic_action_about));
+
+        dataListLeftMenu.add(new DrawerItem("Drone Messages")); // adding a header to the list
+        dataListLeftMenu.add(new DrawerItem("Falta editar", R.drawable.ic_action_about));
+
 
         adapterLeftMenu = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
                 dataListLeftMenu);
@@ -166,25 +171,21 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
         // Add Drawer Item to dataList
         dataListRightMenu.add(new DrawerItem(true)); // adding a spinner to the list
 
-        dataListRightMenu.add(new DrawerItem("My FavoritesR")); // adding a header to the list
-        dataListRightMenu.add(new DrawerItem("MessageR", R.drawable.ic_action_email));
-        dataListRightMenu.add(new DrawerItem("LikesR", R.drawable.ic_action_good));
-        dataListRightMenu.add(new DrawerItem("GamesR", R.drawable.ic_action_gamepad));
-        dataListRightMenu.add(new DrawerItem("LablesR", R.drawable.ic_action_labels));
+        dataListRightMenu.add(new DrawerItem("Information")); // adding a header to the list
+        dataListRightMenu.add(new DrawerItem("Speed Limit", R.drawable.ic_action_email));
+        dataListRightMenu.add(new DrawerItem("Motor Offset", R.drawable.ic_action_good));
 
-        dataListRightMenu.add(new DrawerItem("Main OptionsR"));// adding a header to the list
-        dataListRightMenu.add(new DrawerItem("SearchR", R.drawable.ic_action_search));
-        dataListRightMenu.add(new DrawerItem("CloudR", R.drawable.ic_action_cloud));
-        dataListRightMenu.add(new DrawerItem("CamaraR", R.drawable.ic_action_camera));
-        dataListRightMenu.add(new DrawerItem("VideoR", R.drawable.ic_action_video));
-        dataListRightMenu.add(new DrawerItem("GroupsR", R.drawable.ic_action_group));
-        dataListRightMenu.add(new DrawerItem("Import & ExportR",
-                R.drawable.ic_action_import_export));
+        dataListRightMenu.add(new DrawerItem("Commands"));// adding a header to the list
+        dataListRightMenu.add(new DrawerItem("Falta editar", R.drawable.ic_action_search));
+        dataListRightMenu.add(new DrawerItem("Falta editar", R.drawable.ic_action_cloud));
 
-        dataListRightMenu.add(new DrawerItem("Other OptionR")); // adding a header to the list
-        dataListRightMenu.add(new DrawerItem("AboutR", R.drawable.ic_action_about));
-        dataListRightMenu.add(new DrawerItem("SettingsR", R.drawable.ic_action_settings));
-        dataListRightMenu.add(new DrawerItem("HelpR", R.drawable.ic_action_help));
+        dataListRightMenu.add(new DrawerItem("Other")); // adding a header to the list
+        dataListRightMenu.add(new DrawerItem("Start", R.drawable.ic_action_about));
+        dataListRightMenu.add(new DrawerItem("Stop", R.drawable.ic_action_settings));
+        dataListRightMenu.add(new DrawerItem("Deploy", R.drawable.ic_action_help));
+        dataListRightMenu.add(new DrawerItem("Stop All", R.drawable.ic_action_help));
+        dataListRightMenu.add(new DrawerItem("Falta editar", R.drawable.ic_action_help));
+        dataListRightMenu.add(new DrawerItem("Send Log", R.drawable.ic_action_help));
 
         adapterRightMenu = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
                 dataListRightMenu);
@@ -360,31 +361,31 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
 					.getImgResID());
 			break;
 		case 4:
-			fragment = new FragmentTwo();
-			args.putString(FragmentTwo.ITEM_NAME, dataListLeftMenu.get(possition)
+			fragment = new FragmentOne();
+			args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
 					.getItemName());
-			args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
+			args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
 					.getImgResID());
 			break;
 		case 5:
-			fragment = new FragmentThree();
-			args.putString(FragmentThree.ITEM_NAME, dataListLeftMenu.get(possition)
+			fragment = new FragmentOne();
+			args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
 					.getItemName());
-			args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListLeftMenu
+			args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu
 					.get(possition).getImgResID());
 			break;
 		case 7:
-			fragment = new FragmentTwo();
-			args.putString(FragmentTwo.ITEM_NAME, dataListLeftMenu.get(possition)
+			fragment = new FragmentOne();
+			args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
 					.getItemName());
-			args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
+			args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
 					.getImgResID());
 			break;
 		case 8:
-			fragment = new FragmentThree();
-			args.putString(FragmentThree.ITEM_NAME, dataListLeftMenu.get(possition)
+			fragment = new FragmentOne();
+			args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
 					.getItemName());
-			args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListLeftMenu
+			args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu
 					.get(possition).getImgResID());
 			break;
 		case 9:
@@ -395,17 +396,17 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
 					.getImgResID());
 			break;
 		case 10:
-			fragment = new FragmentTwo();
-			args.putString(FragmentTwo.ITEM_NAME, dataListLeftMenu.get(possition)
+			fragment = new FragmentOne();
+			args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
 					.getItemName());
-			args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
+			args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
 					.getImgResID());
 			break;
 		case 11:
-			fragment = new FragmentThree();
-			args.putString(FragmentThree.ITEM_NAME, dataListLeftMenu.get(possition)
+			fragment = new FragmentOne();
+			args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
 					.getItemName());
-			args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListLeftMenu
+			args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu
 					.get(possition).getImgResID());
 			break;
 		case 12:
@@ -416,10 +417,10 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
 					.getImgResID());
 			break;
 		case 14:
-			fragment = new FragmentThree();
-			args.putString(FragmentThree.ITEM_NAME, dataListLeftMenu.get(possition)
+			fragment = new FragmentOne();
+			args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
 					.getItemName());
-			args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
+			args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
 					.getImgResID());
 			break;	
 		case 15:
@@ -430,10 +431,10 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
 					.getImgResID());
 			break;
 		case 16:
-			fragment = new FragmentTwo();
-			args.putString(FragmentTwo.ITEM_NAME, dataListLeftMenu.get(possition)
+			fragment = new FragmentOne();
+			args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
 					.getItemName());
-			args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
+			args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
 					.getImgResID());
 			break;
 		default:
