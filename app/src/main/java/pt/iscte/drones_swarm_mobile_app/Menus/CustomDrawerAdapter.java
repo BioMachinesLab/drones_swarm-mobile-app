@@ -28,7 +28,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 	int layoutResID;
 
 	public CustomDrawerAdapter(Context context, int layoutResourceID,
-			List<DrawerItem> listItems) {
+							   List<DrawerItem> listItems) {
 		super(context, layoutResourceID, listItems);
 		this.context = context;
 		this.drawerItemList = listItems;
@@ -40,7 +40,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 
-	
+
 		DrawerItemHolder drawerHolder;
 		View view = convertView;
 
@@ -71,7 +71,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 			drawerHolder = (DrawerItemHolder) view.getTag();
 
 		}
-		
+
 		DrawerItem dItem = (DrawerItem) this.drawerItemList.get(position);
 
 		if (dItem.isSpinner()) {
@@ -96,10 +96,10 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 
 						@Override
 						public void onItemSelected(AdapterView<?> arg0,
-								View arg1, int arg2, long arg3) {
+												   View arg1, int arg2, long arg3) {
 							// TODO Auto-generated method stub
 							Toast.makeText(context, "Robot Changed" + (arg2 + 1),
-                                    Toast.LENGTH_SHORT).show();
+									Toast.LENGTH_SHORT).show();
 						}
 
 						@Override
@@ -116,7 +116,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 			drawerHolder.title.setText(dItem.getTitle());
 			Log.d("Getview", "Passed4");
 		} else {
-			
+
 			drawerHolder.headerLayout.setVisibility(LinearLayout.INVISIBLE);
 			drawerHolder.spinnerLayout.setVisibility(LinearLayout.INVISIBLE);
 			drawerHolder.itemLayout.setVisibility(LinearLayout.VISIBLE);

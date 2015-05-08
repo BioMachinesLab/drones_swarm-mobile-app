@@ -3,11 +3,10 @@
     android:layout_height="fill_parent" tools:context=".SplashScreenActivity">
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-      android:src="@drawable/splashscreen"
-        android:background="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/imageView"
-
-        />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/splashscreen" />
 </RelativeLayout>
