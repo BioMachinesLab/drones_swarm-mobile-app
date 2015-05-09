@@ -47,6 +47,11 @@
             android:name=".Activities.AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        <activity
+            android:name=".Activities.ConfigureActivity"
+            android:theme="@android:style/Theme.Translucent"
+            android:label="@string/title_activity_configure" >
+        </activity>
     </application>
 
 </manifest>

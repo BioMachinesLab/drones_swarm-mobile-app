@@ -35,6 +35,18 @@ public class SecondActivity extends Activity {
             }
         });
 
+        Button buttonConfigure = (Button) findViewById(R.id.button_configure);
+
+        buttonConfigure.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+
+                Intent main = new Intent(SecondActivity.this, ConfigureActivity.class);
+                startActivity(main);
+            }
+        });
 
         Button buttonAbout = (Button) findViewById(R.id.button_about);
 
