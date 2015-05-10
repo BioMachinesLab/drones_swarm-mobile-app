@@ -2,10 +2,14 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-        <item name="android:textSize">15sp</item>
-
+        <item name="android:textSize">15dp</item>
+        <item name="android:textAllCaps">false</item>
 
     </style>
+
+
+
+
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>

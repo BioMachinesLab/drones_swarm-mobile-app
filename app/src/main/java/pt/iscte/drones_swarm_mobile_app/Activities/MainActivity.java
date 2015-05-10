@@ -1,5 +1,6 @@
 package pt.iscte.drones_swarm_mobile_app.Activities;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.pm.ActivityInfo;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +38,7 @@ import pt.iscte.drones_swarm_mobile_app.Menus.FragmentTwo;
 import pt.iscte.drones_swarm_mobile_app.R;
 
 
-public class MainActivity extends android.support.v7.app.ActionBarActivity {
+public class MainActivity extends ActionBarActivity {
 
     CustomDrawerAdapter adapterLeftMenu;
     List<DrawerItem> dataListLeftMenu;
@@ -126,6 +129,7 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
 
         mDrawerToggleLeftMenu = new ActionBarDrawerToggle(this, mDrawerLayoutLeftMenu,
                 R.drawable.ic_drawer, R.string.drawer_open,
@@ -338,6 +342,8 @@ public class MainActivity extends android.support.v7.app.ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+
         return true;
     }
 

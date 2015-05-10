@@ -45,4 +45,12 @@
         android:padding="5dp"
          />
 
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_configure"
+        android:layout_marginBottom="59dp"
+        android:layout_alignBottom="@+id/button_1"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

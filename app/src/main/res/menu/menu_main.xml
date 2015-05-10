@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
 
-    <item android:id="@+id/action_right_menu" android:title="Contents" android:icon="@drawable/ic_drawer"
-    android:orderInCategory="100"  app:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/action_right_menu"  android:title="Contents" android:icon="@drawable/ic_drawer"
+    app:showAsAction="ifRoom|withText"  />
 
 </menu>

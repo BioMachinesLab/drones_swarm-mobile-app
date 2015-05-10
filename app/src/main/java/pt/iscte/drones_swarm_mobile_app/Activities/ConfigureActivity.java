@@ -11,10 +11,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import pt.iscte.drones_swarm_mobile_app.R;
 
@@ -31,7 +38,22 @@ public class ConfigureActivity extends Activity {
         setContentView(R.layout.activity_configure);
         // ----------------FULLSCREEN WITH LAYOUT(END)-----------------//
 
-       actionsButtons();
+        addListenerOnSpinnerItemSelection();
+        actionsButtons();
+    }
+
+    public void addListenerOnSpinnerItemSelection() {
+        Spinner spinner_configure = (Spinner) findViewById(R.id.spinner_configure);
+
+        List<String> list = new ArrayList<String>();
+        list.add("list 1");
+        list.add("list 2");
+        list.add("list 3");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_configure.setAdapter(dataAdapter);
+        spinner_configure.setOnItemSelectedListener(new CustomOnItemSelectedListener());
     }
 
     private void actionsButtons(){
@@ -41,11 +63,25 @@ public class ConfigureActivity extends Activity {
 
         {
             @Override
-            public void onClick (View v){
-                Toast.makeText(ConfigureActivity.this,"Entrou botao 1",Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Toast.makeText(ConfigureActivity.this, "Entrou botao 1", Toast.LENGTH_SHORT).show();
 
             }
         });
+
+    }
+    public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            Toast.makeText(parent.getContext(),
+                    "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString(),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+
+        }
 
     }
 
