@@ -1,8 +1,5 @@
 package pt.iscte.drones_swarm_mobile_app.Activities;
 
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,45 +7,31 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Html;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pt.iscte.drones_swarm_mobile_app.Menus.CustomDrawerAdapter;
-import pt.iscte.drones_swarm_mobile_app.Menus.DrawerItem;
-import pt.iscte.drones_swarm_mobile_app.Menus.FragmentOne;
-import pt.iscte.drones_swarm_mobile_app.Menus.FragmentThree;
-import pt.iscte.drones_swarm_mobile_app.Menus.FragmentTwo;
 import pt.iscte.drones_swarm_mobile_app.R;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    CustomDrawerAdapter adapterLeftMenu;
-    List<DrawerItem> dataListLeftMenu;
-    CustomDrawerAdapter adapterRightMenu;
-    List<DrawerItem> dataListRightMenu;
+
     //Bar Title
     private CharSequence mTitle;
     //Left Menu
     private DrawerLayout mDrawerLayoutLeftMenu;
-    private ListView mDrawerListLeftMenu;
+    private ScrollView mDrawerListLeftMenu;
     private ActionBarDrawerToggle mDrawerToggleLeftMenu;
     private CharSequence mDrawerTitleLeftMenu;
     //Right Menu
@@ -62,7 +45,6 @@ public class MainActivity extends ActionBarActivity {
     //Control
     private int value_left_control,value_right_control = 0;
     private SeekBar seekBar_left_control1,seekBar_left_control2,seekBar_right_control1,seekBar_right_control2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,48 +66,14 @@ public class MainActivity extends ActionBarActivity {
 
     private void setLeftMenu(Bundle savedInstanceState) {
         // Initializing
-        dataListLeftMenu = new ArrayList<DrawerItem>();
+
         mTitle = mDrawerTitleLeftMenu = getTitle();
         mDrawerLayoutLeftMenu = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerListLeftMenu = (ListView) findViewById(R.id.left_drawer);
+        mDrawerListLeftMenu = (ScrollView) findViewById(R.id.left_drawer);
 
         mDrawerLayoutLeftMenu.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
 
-        // Add Drawer Item to dataList
-        dataListLeftMenu.add(new DrawerItem(true)); // adding a spinner to the list
-
-        dataListLeftMenu.add(new DrawerItem("Battery Status")); // adding a header to the list
-        dataListLeftMenu.add(new DrawerItem("Battery 1", R.drawable.ic_action_email));
-        dataListLeftMenu.add(new DrawerItem("Battery 2", R.drawable.ic_action_good));
-        dataListLeftMenu.add(new DrawerItem("Battery 3", R.drawable.ic_action_gamepad));
-
-
-        dataListLeftMenu.add(new DrawerItem("GPS Data"));// adding a header to the list
-        dataListLeftMenu.add(new DrawerItem("Has Fix", R.drawable.ic_action_search));
-        dataListLeftMenu.add(new DrawerItem("Latitude", R.drawable.ic_action_cloud));
-        dataListLeftMenu.add(new DrawerItem("Longitude", R.drawable.ic_action_camera));
-        dataListLeftMenu.add(new DrawerItem("Vel.(Km/h)", R.drawable.ic_action_video));
-        dataListLeftMenu.add(new DrawerItem("Time", R.drawable.ic_action_group));
-        dataListLeftMenu.add(new DrawerItem("Sat. View", R.drawable.ic_action_import_export));
-        dataListLeftMenu.add(new DrawerItem("Sat. Used", R.drawable.ic_action_import_export));
-        dataListLeftMenu.add(new DrawerItem("HDOP", R.drawable.ic_action_import_export));
-        dataListLeftMenu.add(new DrawerItem("PDOP", R.drawable.ic_action_import_export));
-        dataListLeftMenu.add(new DrawerItem("VDOP", R.drawable.ic_action_import_export));
-
-        dataListLeftMenu.add(new DrawerItem("Refresh Rate")); // adding a header to the list
-        dataListLeftMenu.add(new DrawerItem("Details", R.drawable.ic_action_about));
-
-        dataListLeftMenu.add(new DrawerItem("Drone Messages")); // adding a header to the list
-        dataListLeftMenu.add(new DrawerItem("Falta editar", R.drawable.ic_action_about));
-
-
-        adapterLeftMenu = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
-                dataListLeftMenu);
-
-        mDrawerListLeftMenu.setAdapter(adapterLeftMenu);
-
-        mDrawerListLeftMenu.setOnItemClickListener(new DrawerItemClickListenerLeftMenu());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -149,22 +97,12 @@ public class MainActivity extends ActionBarActivity {
 
         mDrawerLayoutLeftMenu.setDrawerListener(mDrawerToggleLeftMenu);
 
-        if (savedInstanceState == null) {
 
-            if (dataListLeftMenu.get(0).isSpinner()
-                    & dataListLeftMenu.get(1).getTitle() != null) {
-                SelectItemLeftMenu(2);
-            } else if (dataListLeftMenu.get(0).getTitle() != null) {
-                SelectItemLeftMenu(1);
-            } else {
-                SelectItemLeftMenu(0);
-            }
-        }
     }
 
     private void setRightMenu(Bundle savedInstanceState) {
         // Initializing
-        dataListRightMenu = new ArrayList<DrawerItem>();
+
         mTitle = mDrawerTitleRightMenu = getTitle();
         mDrawerLayoutRightMenu = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerListRightMenu = (ListView) findViewById(R.id.right_drawer);
@@ -172,31 +110,6 @@ public class MainActivity extends ActionBarActivity {
         mDrawerLayoutRightMenu.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.END);
 
-        // Add Drawer Item to dataList
-        dataListRightMenu.add(new DrawerItem(true)); // adding a spinner to the list
-
-        dataListRightMenu.add(new DrawerItem("Information")); // adding a header to the list
-        dataListRightMenu.add(new DrawerItem("Speed Limit", R.drawable.ic_action_email));
-        dataListRightMenu.add(new DrawerItem("Motor Offset", R.drawable.ic_action_good));
-
-        dataListRightMenu.add(new DrawerItem("Commands"));// adding a header to the list
-        dataListRightMenu.add(new DrawerItem("Falta editar", R.drawable.ic_action_search));
-        dataListRightMenu.add(new DrawerItem("Falta editar", R.drawable.ic_action_cloud));
-
-        dataListRightMenu.add(new DrawerItem("Other")); // adding a header to the list
-        dataListRightMenu.add(new DrawerItem("Start", R.drawable.ic_action_about));
-        dataListRightMenu.add(new DrawerItem("Stop", R.drawable.ic_action_settings));
-        dataListRightMenu.add(new DrawerItem("Deploy", R.drawable.ic_action_help));
-        dataListRightMenu.add(new DrawerItem("Stop All", R.drawable.ic_action_help));
-        dataListRightMenu.add(new DrawerItem("Falta editar", R.drawable.ic_action_help));
-        dataListRightMenu.add(new DrawerItem("Send Log", R.drawable.ic_action_help));
-
-        adapterRightMenu = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
-                dataListRightMenu);
-
-        mDrawerListRightMenu.setAdapter(adapterRightMenu);
-
-        mDrawerListRightMenu.setOnItemClickListener(new DrawerItemClickListenerRightMenu());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -221,17 +134,7 @@ public class MainActivity extends ActionBarActivity {
 
         mDrawerLayoutRightMenu.setDrawerListener(mDrawerToggleRightMenu);
 
-        if (savedInstanceState == null) {
 
-            if (dataListRightMenu.get(0).isSpinner()
-                    & dataListRightMenu.get(1).getTitle() != null) {
-                SelectItemRightMenu(2);
-            } else if (dataListRightMenu.get(0).getTitle() != null) {
-                SelectItemRightMenu(1);
-            } else {
-                SelectItemRightMenu(0);
-            }
-        }
     }
 
     private void actionButtonsControl(){
@@ -347,230 +250,6 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
-    public void SelectItemLeftMenu(int possition) {
-
-        Fragment fragment = null;
-        Bundle args = new Bundle();
-        switch (possition) {
-
-            case 2:
-                //fragment = new FragmentThree();
-                //args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
-                //		.getItemName());
-                //args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList
-                //		.get(possition).getImgResID());
-                break;
-            case 3:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 4:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 5:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListLeftMenu
-                        .get(possition).getImgResID());
-                break;
-            case 7:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 8:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListLeftMenu
-                        .get(possition).getImgResID());
-                break;
-            case 9:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 10:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 11:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListLeftMenu
-                        .get(possition).getImgResID());
-                break;
-            case 12:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 14:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 15:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 16:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataListLeftMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListLeftMenu.get(possition)
-                        .getImgResID());
-                break;
-            default:
-                break;
-        }
-        if(fragment!=null) {
-            fragment.setArguments(args);
-            FragmentManager frgManager = getFragmentManager();
-            frgManager.beginTransaction().replace(R.id.content_frame, fragment)
-                    .commit();
-        }
-        mDrawerListLeftMenu.setItemChecked(possition, true);
-        setTitle(dataListLeftMenu.get(possition).getItemName());
-        mDrawerLayoutLeftMenu.closeDrawer(mDrawerListLeftMenu);
-
-    }
-
-    public void SelectItemRightMenu(int possition) {
-
-        Fragment fragment = null;
-        Bundle args = new Bundle();
-        switch (possition) {
-
-            case 2:
-                //fragment = new FragmentThree();
-                //args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
-                //		.getItemName());
-                //args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList
-                //		.get(possition).getImgResID());
-                break;
-            case 3:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListRightMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 4:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListRightMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 5:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListRightMenu
-                        .get(possition).getImgResID());
-                break;
-            case 7:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListRightMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 8:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListRightMenu
-                        .get(possition).getImgResID());
-                break;
-            case 9:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListRightMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 10:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListRightMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 11:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListRightMenu
-                        .get(possition).getImgResID());
-                break;
-            case 12:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListRightMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 14:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataListRightMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 15:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataListRightMenu.get(possition)
-                        .getImgResID());
-                break;
-            case 16:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataListRightMenu.get(possition)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataListRightMenu.get(possition)
-                        .getImgResID());
-                break;
-            default:
-                break;
-        }
-        if(fragment!=null) {
-            fragment.setArguments(args);
-            FragmentManager frgManager = getFragmentManager();
-            frgManager.beginTransaction().replace(R.id.content_frame, fragment)
-                    .commit();
-        }
-        mDrawerListRightMenu.setItemChecked(possition, true);
-        setTitle(dataListRightMenu.get(possition).getItemName());
-        mDrawerLayoutRightMenu.closeDrawer(mDrawerListRightMenu);
-
-    }
-
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
@@ -660,28 +339,4 @@ public class MainActivity extends ActionBarActivity {
         mMap.addMarker(new MarkerOptions().position(new LatLng(38.723827300000000000, -9.139769999999999000)).title("Teste ^^,"));
     }
 
-    private class DrawerItemClickListenerLeftMenu implements
-            ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
-            if (dataListLeftMenu.get(position).getTitle() == null) {
-                SelectItemLeftMenu(position);
-            }
-
-
-        }
-    }
-    private class DrawerItemClickListenerRightMenu implements
-            ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
-            if (dataListRightMenu.get(position).getTitle() == null) {
-                SelectItemRightMenu(position);
-            }
-
-
-        }
-    }
 }

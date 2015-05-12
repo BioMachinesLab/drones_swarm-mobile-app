@@ -143,16 +143,172 @@
          the container. A solid background is used for contrast
          with the content view. -->
 
-
-    <ListView
+    <!-- android:layout_gravity="start" -->
+    <ScrollView
         android:id="@+id/left_drawer"
         android:layout_width="240dp"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:background="#ffff"/>
+        android:background="#ffff">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                     />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Battery Status"
+                    android:id="@+id/textView"
+                    android:layout_below="@+id/spinner"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@android:color/darker_gray"
+                    android:id="@+id/view" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView_battery1"
+                            android:src="@drawable/ic_action_about"
+                            android:layout_marginBottom="3dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Battery Status 1"
+                            android:id="@+id/textView_battery_status1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100%"
+                            android:id="@+id/textView_percentage1"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView_battery2"
+                            android:src="@drawable/ic_action_about"
+                            android:layout_marginBottom="3dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Battery Status 2"
+                            android:id="@+id/textView_battery_status2"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100%"
+                            android:id="@+id/textView_percentage2"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView_battery3"
+                            android:src="@drawable/ic_action_about"
+                            android:layout_marginBottom="3dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Battery Status 3"
+                            android:id="@+id/textView_battery_status3"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100%"
+                            android:id="@+id/textView_percentage3"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 
     <ListView
         android:id="@+id/right_drawer"
