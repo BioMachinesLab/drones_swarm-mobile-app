@@ -145,179 +145,636 @@
 
     <!-- android:layout_gravity="start" -->
     <ScrollView
-        android:id="@+id/left_drawer"
+        android:id="@+id/scrollView_left_menu"
         android:layout_width="240dp"
         android:layout_height="fill_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:background="#ffff">
+        android:fadeScrollbars="false"
+        android:background="#37474f">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                     />
+            <LinearLayout
+                android:id="@+id/layout_spinner_left_menu_drone"
+                android:orientation="vertical"
+                android:background="#818181"
+                android:layout_centerHorizontal="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-                <TextView
+                <Spinner
+                    android:id="@+id/spinner_left_menu_drone"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Battery Status"
-                    android:id="@+id/textView"
-                    android:layout_below="@+id/spinner"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    />
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/textView"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:background="@android:color/darker_gray"
-                    android:id="@+id/view" />
+                    android:popupBackground="#605e5e"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView_battery_status_header"
+                android:layout_below="@+id/layout_spinner_left_menu_drone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:layout_marginLeft="10dp"
+                android:text="Battery Status"
+                android:textColor="#fff"/>
+            <View
+                android:id="@+id/line1"
+                android:layout_below="@+id/textView_battery_status_header"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout_status_batteries"
+                android:layout_below="@+id/line1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/view"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="10dp">
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/imageView_battery1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/battery"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="15dp"/>
 
+                    <TextView
+                        android:id="@+id/textView_battery_status1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Battery Status 1"
+                        android:layout_marginLeft="10dp"/>
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/imageView_battery1"
-                            android:src="@drawable/ic_action_about"
-                            android:layout_marginBottom="3dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            />
+                    <TextView
+                        android:id="@+id/textView_percentage1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Battery Status 1"
-                            android:id="@+id/textView_battery_status1"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="100%"
-                            android:id="@+id/textView_percentage1"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            />
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/imageView_battery2"
-                            android:src="@drawable/ic_action_about"
-                            android:layout_marginBottom="3dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Battery Status 2"
-                            android:id="@+id/textView_battery_status2"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="100%"
-                            android:id="@+id/textView_percentage2"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            />
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/imageView_battery3"
-                            android:src="@drawable/ic_action_about"
-                            android:layout_marginBottom="3dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Battery Status 3"
-                            android:id="@+id/textView_battery_status3"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="100%"
-                            android:id="@+id/textView_percentage3"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            />
-
-                    </LinearLayout>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView_battery2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/battery"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="15dp"/>
+
+                    <TextView
+                        android:id="@+id/textView_battery_status2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Battery Status 2"/>
+
+                    <TextView
+                        android:id="@+id/textView_percentage2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_status_battery3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView_battery3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/battery"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="15dp"/>
+
+                    <TextView
+                        android:id="@+id/textView_battery_status3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Battery Status 3"/>
+
+                    <TextView
+                        android:id="@+id/textView_percentage3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView_gps_data_header"
+                android:layout_below="@+id/linearLayout_status_batteries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:paddingTop="12dp"
+                android:layout_marginLeft="10dp"
+                android:text="GPS Data"/>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_below="@+id/textView_gps_data_header"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_gps_data"
+                android:layout_below="@+id/line2"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:background="@layout/customborder"
+                    android:layout_width="100dp"
+                    android:layout_height="25dp">
+
+                    <ImageView
+                        android:id="@+id/imageView_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/details"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="10dp" />
+
+                    <TextView
+                        android:id="@+id/textView_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Details" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_hasfix_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Has Fix         ->___________"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_latitude_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Latitude        ->___________" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_longitude_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Longitude    ->___________" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_velocity_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Vel.(Km/h)  ->___________"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_time_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Time              ->___________" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_satview_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Sat.View      ->___________"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_satused_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Sat.Used      ->___________"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_hdop_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="HDOP            ->___________" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_pdop_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="PDOP            ->___________"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_vdop_details_gps_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="VDOP            ->___________"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView_refresh_rate_header"
+                android:layout_below="@+id/linearLayout_gps_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Refresh Rate"
+                android:textColor="#fff"
+                android:paddingTop="12dp"
+                android:layout_marginLeft="10dp"/>
+
+            <View
+                android:id="@+id/line3"
+                android:layout_below="@+id/textView_refresh_rate_header"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_refresh_rate_data"
+                android:layout_below="@+id/line3"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:background="@layout/customborder"
+                    android:layout_width="100dp"
+                    android:layout_height="25dp">
+
+                    <ImageView
+                        android:id="@+id/imageView_details_refresh_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/details"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="10dp" />
+
+                    <TextView
+                        android:id="@+id/textView_details_refresh_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Details" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_spinner_left_menu_refresh_rate"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView_actual_rate_refresh_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Actual Rate"
+                        android:layout_marginLeft="13dp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_left_menu_refresh_rate"
+                        android:layout_width="fill_parent"
+                        android:popupBackground="#605e5e"
+                        android:layout_marginLeft="30dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView_drone_messages_header"
+                android:layout_below="@+id/linearLayout_refresh_rate_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drone Messages"
+                android:textColor="#fff"
+                android:paddingTop="12dp"
+                android:layout_marginLeft="10dp"/>
+
+            <View
+                android:id="@+id/line4"
+                android:layout_below="@+id/textView_drone_messages_header"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@android:color/darker_gray"/>
+
+            <ScrollView
+                android:id="@+id/scrollView_drone_messages"
+                android:layout_below="@+id/line4"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="9dp"
+                android:layout_marginTop="8dp"
+                android:fadeScrollbars="false"
+                android:background="@layout/customborder">
+
+                <TextView
+                    android:id="@+id/textView_drone_messages"
+                    android:layout_below="@+id/linearLayout_refresh_rate_data"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="6dp"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:paddingTop="12dp" />
+
+            </ScrollView>
+
         </RelativeLayout>
     </ScrollView>
 
-    <ListView
-        android:id="@+id/right_drawer"
+
+
+    <!-- android:layout_gravity="right" -->
+    <ScrollView
+        android:id="@+id/scrollView_right_menu"
         android:layout_width="240dp"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_gravity="right"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:background="#ffff"/>
+        android:fadeScrollbars="false"
+        android:background="#37474f">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView_about_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:paddingTop="12dp"
+                android:layout_marginLeft="10dp"
+                android:text="About"/>
+
+            <View
+                android:id="@+id/line5"
+                android:layout_below="@+id/textView_about_header"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:id="@+id/layout_about1_right_menu"
+                android:layout_below="@+id/line5"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView_speed_limit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/circle"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/textView_speed_limit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="#fff"
+                    android:layout_marginTop="2dp"
+                    android:text="Speed Limit" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_about2_right_menu"
+                android:layout_below="@+id/layout_about1_right_menu"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView_speed_limit_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#fff"
+                    android:text="50" />
+
+                <SeekBar
+                    android:id="@+id/seekbar_speed_limit_right_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="50"
+                    android:thumb="@drawable/steekbar_thumb"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_about3_right_menu"
+                android:layout_below="@+id/layout_about2_right_menu"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView_motor_offset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/circle"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/textView_motor_offset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="#fff"
+                    android:layout_marginTop="2dp"
+                    android:text="Motor Offset" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_about4_right_menu"
+                android:layout_below="@+id/layout_about3_right_menu"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView_motor_offset_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#fff"
+                    android:text="50" />
+
+                <SeekBar
+                    android:id="@+id/seekbar_motor_offset_right_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="50"
+                    android:thumb="@drawable/steekbar_thumb"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
 
 </android.support.v4.widget.DrawerLayout>
