@@ -604,6 +604,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="6dp"
                     android:textColor="#fff"
+                    android:textSize="15dp"
                     android:gravity="center"
                     android:paddingTop="12dp" />
 
@@ -816,6 +817,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="6dp"
                     android:textColor="#fff"
+                    android:textSize="15dp"
                     android:gravity="center"
                     android:paddingTop="12dp" />
 
