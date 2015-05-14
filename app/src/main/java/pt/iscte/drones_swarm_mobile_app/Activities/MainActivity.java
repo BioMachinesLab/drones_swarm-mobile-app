@@ -3,6 +3,7 @@ package pt.iscte.drones_swarm_mobile_app.Activities;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
@@ -247,7 +248,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                seekBar.setSecondaryProgress(seekBar.getProgress());
             }
 
             @Override
@@ -270,7 +271,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                seekBar.setSecondaryProgress(seekBar.getProgress());
             }
 
             @Override
