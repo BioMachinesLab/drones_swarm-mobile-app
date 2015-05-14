@@ -136,13 +136,7 @@
     </FrameLayout>
 
 
-    <!-- android:layout_gravity="start" tells DrawerLayout to treat
-         this as a sliding drawer on the left side for left-to-right
-         languages and on the right side for right-to-left languages.
-         The drawer is given a fixed width in dp and extends the full height of
-         the container. A solid background is used for contrast
-         with the content view. -->
-
+    <!-- LEFT MENU -->
     <!-- android:layout_gravity="start" -->
     <ScrollView
         android:id="@+id/scrollView_left_menu"
@@ -152,7 +146,6 @@
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:fadeScrollbars="false"
         android:background="#37474f">
 
         <RelativeLayout
@@ -597,7 +590,6 @@
                 android:layout_below="@+id/line4"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginRight="9dp"
                 android:layout_marginTop="8dp"
                 android:fadeScrollbars="false"
                 android:background="@layout/customborder">
@@ -620,18 +612,16 @@
         </RelativeLayout>
     </ScrollView>
 
-
-
+    <!-- RIGHT MENU -->
     <!-- android:layout_gravity="right" -->
     <ScrollView
         android:id="@+id/scrollView_right_menu"
-        android:layout_width="240dp"
+        android:layout_width="300dp"
         android:layout_height="fill_parent"
         android:layout_gravity="right"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:fadeScrollbars="false"
         android:background="#37474f">
 
         <RelativeLayout
@@ -695,20 +685,20 @@
 
                 <TextView
                     android:id="@+id/textView_speed_limit_value"
-                    android:layout_width="wrap_content"
+                    android:layout_width="33dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:textColor="#fff"
-                    android:text="50" />
+                    android:text="100" />
 
                 <SeekBar
                     android:id="@+id/seekbar_speed_limit_right_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
                     android:max="100"
-                    android:progress="50"
+                    android:progress="100"
                     android:thumb="@drawable/steekbar_thumb"
                     android:layout_weight="1"/>
 
@@ -753,22 +743,156 @@
 
                 <TextView
                     android:id="@+id/textView_motor_offset_value"
-                    android:layout_width="wrap_content"
+                    android:layout_width="33dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:textColor="#fff"
-                    android:text="50" />
+                    android:text="0" />
 
                 <SeekBar
                     android:id="@+id/seekbar_motor_offset_right_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:max="100"
-                    android:progress="50"
+                    android:layout_marginRight="15dp"
+                    android:max="200"
+                    android:progress="100"
                     android:thumb="@drawable/steekbar_thumb"
                     android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView_commands_header"
+                android:layout_below="@+id/layout_about4_right_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:paddingTop="12dp"
+                android:layout_marginLeft="10dp"
+                android:text="Commands"/>
+
+            <View
+                android:id="@+id/line6"
+                android:layout_below="@+id/textView_commands_header"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:id="@+id/layout_commands_right_menu"
+                android:layout_below="@+id/line6"
+                android:background="@layout/customborder"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <Spinner
+                    android:id="@+id/spinner_right_menu_commands"
+                    android:layout_width="fill_parent"
+                    android:popupBackground="#605e5e"
+                    android:layout_height="fill_parent"/>
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/scrollView_commands"
+                android:layout_below="@+id/layout_commands_right_menu"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="8dp"
+                android:fadeScrollbars="false"
+                android:background="@layout/customborder">
+
+                <EditText
+                    android:id="@+id/editText_commands"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="6dp"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:paddingTop="12dp" />
+
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/layout_buttons1_right_menu"
+                android:layout_below="@+id/scrollView_commands"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+
+                <Button
+                    android:id="@+id/button_start_right_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start" />
+
+                <Button
+                    android:id="@+id/button_stop_right_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stop" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_buttons2_right_menu"
+                android:layout_below="@+id/layout_buttons1_right_menu"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <Button
+                    android:id="@+id/button_deploy_right_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deploy" />
+
+                <Button
+                    android:id="@+id/button_stop_all_right_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stop All" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_buttons3_right_menu"
+                android:layout_below="@+id/layout_buttons2_right_menu"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editText_buttons"
+                    android:layout_width="130dp"
+                    android:layout_height="45dp"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:background="#fff" />
+
+                <Button
+                    android:id="@+id/button_send_log_right_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Send Log" />
 
             </LinearLayout>
 
