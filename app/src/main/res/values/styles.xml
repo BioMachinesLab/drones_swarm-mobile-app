@@ -10,6 +10,7 @@
 
     <style name="MainActivity" parent="Theme.AppCompat">
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
 

@@ -175,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:layout_marginLeft="10dp"
-                android:text="Battery Status"
+                android:text="@string/string_textView_battery_status_header"
                 android:textColor="#fff"/>
             <View
                 android:id="@+id/line1"
@@ -213,7 +213,7 @@
                         android:id="@+id/textView_battery_status1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Battery Status 1"
+                        android:text="@string/string_textView_battery_status1"
                         android:layout_marginLeft="10dp"/>
 
                     <TextView
@@ -242,7 +242,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Battery Status 2"/>
+                        android:text="@string/string_textView_battery_status2"/>
 
                     <TextView
                         android:id="@+id/textView_percentage2"
@@ -271,7 +271,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Battery Status 3"/>
+                        android:text="@string/string_textView_battery_status3"/>
 
                     <TextView
                         android:id="@+id/textView_percentage3"
@@ -291,7 +291,7 @@
                 android:textColor="#fff"
                 android:paddingTop="12dp"
                 android:layout_marginLeft="10dp"
-                android:text="GPS Data"/>
+                android:text="@string/string_textView_gps_data_header"/>
 
             <View
                 android:id="@+id/line2"
@@ -332,7 +332,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="13dp"
                         android:layout_marginTop="2dp"
-                        android:text="Details" />
+                        android:text="@string/string_textView_details_gps_data" />
 
                 </LinearLayout>
 
@@ -347,7 +347,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="Has Fix         ->___________"/>
+                        android:text="@string/string_textView_hasfix_details_gps_data"/>
 
                 </LinearLayout>
 
@@ -362,7 +362,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="Latitude        ->___________" />
+                        android:text="@string/string_textView_latitude_details_gps_data" />
 
                 </LinearLayout>
 
@@ -377,7 +377,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="Longitude    ->___________" />
+                        android:text="@string/string_textView_longitude_details_gps_data" />
 
                 </LinearLayout>
 
@@ -392,7 +392,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="Vel.(Km/h)  ->___________"/>
+                        android:text="@string/string_textView_velocity_details_gps_data"/>
 
                 </LinearLayout>
 
@@ -407,7 +407,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="Time              ->___________" />
+                        android:text="@string/string_textView_time_details_gps_data" />
 
                 </LinearLayout>
 
@@ -422,7 +422,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="Sat.View      ->___________"/>
+                        android:text="@string/string_textView_satview_details_gps_data"/>
 
                 </LinearLayout>
 
@@ -437,7 +437,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="Sat.Used      ->___________"/>
+                        android:text="@string/string_textView_satused_details_gps_data"/>
 
                 </LinearLayout>
 
@@ -452,7 +452,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="HDOP            ->___________" />
+                        android:text="@string/string_textView_hdop_details_gps_data" />
 
                 </LinearLayout>
 
@@ -467,7 +467,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="PDOP            ->___________"/>
+                        android:text="@string/string_textView_pdop_details_gps_data"/>
 
                 </LinearLayout>
 
@@ -482,7 +482,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="VDOP            ->___________"/>
+                        android:text="@string/string_textView_vdop_details_gps_data"/>
 
                 </LinearLayout>
 
@@ -493,7 +493,7 @@
                 android:layout_below="@+id/linearLayout_gps_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Refresh Rate"
+                android:text="@string/string_textView_refresh_rate_header"
                 android:textColor="#fff"
                 android:paddingTop="12dp"
                 android:layout_marginLeft="10dp"/>
@@ -537,7 +537,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="13dp"
                         android:layout_marginTop="2dp"
-                        android:text="Details" />
+                        android:text="@string/string_textView_details_refresh_rate" />
 
                 </LinearLayout>
 
@@ -552,7 +552,7 @@
                         android:id="@+id/textView_actual_rate_refresh_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Actual Rate"
+                        android:text="@string/string_textView_actual_rate_refresh_rate"
                         android:layout_marginLeft="13dp" />
 
                     <Spinner
@@ -571,7 +571,7 @@
                 android:layout_below="@+id/linearLayout_refresh_rate_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Drone Messages"
+                android:text="@string/string_textView_drone_messages_header"
                 android:textColor="#fff"
                 android:paddingTop="12dp"
                 android:layout_marginLeft="10dp"/>
@@ -636,7 +636,7 @@
                 android:textColor="#fff"
                 android:paddingTop="12dp"
                 android:layout_marginLeft="10dp"
-                android:text="About"/>
+                android:text="@string/string_textView_about_header"/>
 
             <View
                 android:id="@+id/line5"
@@ -671,7 +671,7 @@
                     android:layout_marginLeft="4dp"
                     android:textColor="#fff"
                     android:layout_marginTop="2dp"
-                    android:text="Speed Limit" />
+                    android:text="@string/string_textView_speed_limit" />
 
             </LinearLayout>
 
@@ -691,7 +691,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:textColor="#fff"
-                    android:text="100" />
+                    android:text="@string/string_textView_speed_limit_value" />
 
                 <SeekBar
                     android:id="@+id/seekbar_speed_limit_right_menu"
@@ -730,7 +730,7 @@
                     android:layout_marginLeft="4dp"
                     android:textColor="#fff"
                     android:layout_marginTop="2dp"
-                    android:text="Motor Offset" />
+                    android:text="@string/string_textView_motor_offset" />
 
             </LinearLayout>
 
@@ -750,7 +750,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:textColor="#fff"
-                    android:text="0" />
+                    android:text="@string/string_textView_motor_offset_value" />
 
                 <SeekBar
                     android:id="@+id/seekbar_motor_offset_right_menu"
@@ -773,7 +773,7 @@
                 android:textColor="#fff"
                 android:paddingTop="12dp"
                 android:layout_marginLeft="10dp"
-                android:text="Commands"/>
+                android:text="@string/string_textView_commands_header"/>
 
             <View
                 android:id="@+id/line6"
@@ -840,13 +840,13 @@
                     android:id="@+id/button_start_right_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Start" />
+                    android:text="@string/string_button_start_right_menu" />
 
                 <Button
                     android:id="@+id/button_stop_right_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stop" />
+                    android:text="@string/string_button_stop_right_menu" />
 
             </LinearLayout>
 
@@ -864,13 +864,13 @@
                     android:id="@+id/button_deploy_right_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Deploy" />
+                    android:text="@string/string_button_deploy_right_menu" />
 
                 <Button
                     android:id="@+id/button_stop_all_right_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stop All" />
+                    android:text="@string/string_button_stop_all_right_menu" />
 
             </LinearLayout>
 
@@ -896,7 +896,7 @@
                     android:id="@+id/button_send_log_right_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Send Log" />
+                    android:text="@string/string_button_send_log_right_menu" />
 
             </LinearLayout>
 

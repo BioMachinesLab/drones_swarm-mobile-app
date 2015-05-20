@@ -13,4 +13,46 @@
     <string name="title_activity_about">AboutActivity</string>
     <string name="title_activity_configure">Configure</string>
 
+
+    <!-- Main Activity-->
+    <!-- Left Menu-->
+    <string name="string_textView_battery_status_header">Battery Status</string>
+    <string name="string_textView_battery_status1">Battery Status 1</string>
+    <string name="string_textView_battery_status2">Battery Status 2</string>
+    <string name="string_textView_battery_status3">Battery Status 3</string>
+
+    <string name="string_textView_gps_data_header">GPS Data</string>
+    <string name="string_textView_details_gps_data">Details</string>
+    <string name="string_textView_hasfix_details_gps_data">Has Fix         ->___________</string>
+    <string name="string_textView_latitude_details_gps_data">Latitude        ->___________</string>
+    <string name="string_textView_longitude_details_gps_data">Longitude    ->___________</string>
+    <string name="string_textView_velocity_details_gps_data">Vel.(Km/h)  ->___________</string>
+    <string name="string_textView_time_details_gps_data">Time              ->___________</string>
+    <string name="string_textView_satview_details_gps_data">Sat.View      ->___________</string>
+    <string name="string_textView_satused_details_gps_data">Sat.Used      ->___________</string>
+    <string name="string_textView_hdop_details_gps_data">HDOP            ->___________</string>
+    <string name="string_textView_pdop_details_gps_data">PDOP            ->___________</string>
+    <string name="string_textView_vdop_details_gps_data">VDOP            ->___________</string>
+
+    <string name="string_textView_refresh_rate_header">Refresh Rate</string>
+    <string name="string_textView_details_refresh_rate">Details</string>
+    <string name="string_textView_actual_rate_refresh_rate">Actual Rate</string>
+
+    <string name="string_textView_drone_messages_header">Drone Messages</string>
+
+    <!-- Right Menu-->
+    <string name="string_textView_about_header">About</string>
+    <string name="string_textView_speed_limit">Speed Limit</string>
+    <string name="string_textView_speed_limit_value">100</string>
+    <string name="string_textView_motor_offset">Motor Offset</string>
+    <string name="string_textView_motor_offset_value">0</string>
+
+    <string name="string_textView_commands_header">Commands</string>
+
+    <string name="string_button_start_right_menu">Start</string>
+    <string name="string_button_stop_right_menu">Stop</string>
+    <string name="string_button_deploy_right_menu">Deploy</string>
+    <string name="string_button_stop_all_right_menu">Stop All</string>
+    <string name="string_button_send_log_right_menu">Send Log</string>
+
 </resources>
