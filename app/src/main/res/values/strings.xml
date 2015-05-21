@@ -55,4 +55,9 @@
     <string name="string_button_stop_all_right_menu">Stop All</string>
     <string name="string_button_send_log_right_menu">Send Log</string>
 
+    <!-- Second Activity-->
+    <string name="string_button_start_second_activity">Start</string>
+    <string name="string_button_configure_second_activity">Configure</string>
+    <string name="string_button_about_second_activity">About</string>
+
 </resources>

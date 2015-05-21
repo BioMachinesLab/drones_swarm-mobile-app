@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -21,10 +23,14 @@ public class SecondActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // ----------------FULLSCREEN WITH LAYOUT(START)-----------------//
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_second);
+        // ----------------FULLSCREEN WITH LAYOUT(END)-----------------//
 
-
-        Button buttonStart = (Button) findViewById(R.id.button_start);
+        Button buttonStart = (Button) findViewById(R.id.button_start_second_activity);
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +41,7 @@ public class SecondActivity extends Activity {
             }
         });
 
-        Button buttonConfigure = (Button) findViewById(R.id.button_configure);
+        Button buttonConfigure = (Button) findViewById(R.id.button_configure_second_activity);
 
         buttonConfigure.setOnClickListener(new View.OnClickListener()
 
@@ -48,7 +54,7 @@ public class SecondActivity extends Activity {
             }
         });
 
-        Button buttonAbout = (Button) findViewById(R.id.button_about);
+        Button buttonAbout = (Button) findViewById(R.id.button_about_second_activity);
 
         buttonAbout.setOnClickListener(new View.OnClickListener()
 
