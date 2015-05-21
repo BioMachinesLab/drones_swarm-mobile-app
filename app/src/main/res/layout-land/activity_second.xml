@@ -14,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/icon_second_activity"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="50dp" />
+
 
     <Button
         android:id="@+id/button_start_second_activity"
@@ -27,9 +28,12 @@
         android:drawableLeft="@drawable/icon_start_button"
         android:paddingLeft= "30dp"
         android:paddingRight= "30dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageView_second_activity"
-        android:layout_marginTop="120dp" />
+        android:layout_toLeftOf="@+id/imageView_second_activity"
+        android:layout_toStartOf="@+id/imageView_second_activity"
+        android:layout_marginRight="62dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginTop="65dp" />
 
     <Button
         android:id="@+id/button_configure_second_activity"
@@ -42,8 +46,7 @@
         android:drawableLeft="@drawable/icon_configure_button"
         android:paddingLeft= "30dp"
         android:paddingRight= "30dp"
-        android:layout_below="@+id/button_start_second_activity"
-        android:layout_marginTop="120dp"
+        android:layout_alignTop="@+id/button_start_second_activity"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -57,11 +60,12 @@
         android:drawableLeft="@drawable/icon_about_button"
         android:paddingLeft= "30dp"
         android:paddingRight= "30dp"
-        android:layout_below="@+id/button_configure_second_activity"
-        android:layout_marginTop="120dp"
-        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/button_configure_second_activity"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="100dp"
+       />
 
-        />
 
 
 </RelativeLayout>
