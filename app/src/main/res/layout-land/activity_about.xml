@@ -8,20 +8,23 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="270dp"
-        android:layout_height="270dp"
-        android:layout_above="@+id/textView1_about_activity"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:src="@drawable/icon_about_activity"
         android:background="@drawable/borders_about_activity"
         android:paddingTop="15dp"
         android:paddingBottom="18dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="105dp" />
+
+         />
 
     <TextView
         android:id="@+id/textView1_about_activity"
+        android:layout_below="@+id/imageView3"
         android:text="@string/string_textView1_about_activity"
         android:textSize="25dp"
         android:textColor="#000"
@@ -30,12 +33,11 @@
         android:paddingBottom="20dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
         android:background="@drawable/borders_about_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
 
@@ -51,8 +53,9 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/borders_about_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -46,6 +46,7 @@
 
         <activity
             android:name=".Activities.AboutActivity"
+            android:theme="@android:style/Theme.Translucent"
             android:label="@string/title_activity_about" >
         </activity>
         <activity

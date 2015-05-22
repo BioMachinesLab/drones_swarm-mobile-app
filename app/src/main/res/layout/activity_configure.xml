@@ -5,52 +5,54 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ImageButton
-        android:id="@+id/button_1"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:src="@drawable/common_signin_btn_icon_pressed_light"
-        android:padding="5dp"
-        />
-
-    <ImageButton
-        android:id="@+id/button_2"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="210dp"
-        android:src="@drawable/common_signin_btn_icon_pressed_light"
-        android:padding="5dp"
-        />
-
-    <ImageButton
-        android:id="@+id/button_3"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="270dp"
-        android:src="@drawable/common_signin_btn_icon_pressed_light"
-        android:padding="5dp"
-         />
-
-    <ImageButton
-        android:id="@+id/button_4"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:src="@drawable/common_signin_btn_icon_pressed_light"
-        android:padding="5dp"
-         />
-
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_configure"
         android:layout_marginBottom="59dp"
         android:layout_alignBottom="@+id/button_1"
         android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/button_1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:src="@drawable/common_signin_btn_icon_pressed_light"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        />
+
+    <ImageButton
+        android:id="@+id/button_2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:src="@drawable/common_signin_btn_icon_pressed_light"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        />
+
+    <ImageButton
+        android:id="@+id/button_3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:src="@drawable/common_signin_btn_icon_pressed_light"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+         />
+
+    <ImageButton
+        android:id="@+id/button_4"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:src="@drawable/common_signin_btn_icon_pressed_light"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+         />
+
+
 
 </RelativeLayout>
