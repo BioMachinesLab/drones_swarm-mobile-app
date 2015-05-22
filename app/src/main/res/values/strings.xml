@@ -7,7 +7,7 @@
 
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
-    <string name="title_main_activity">Operations</string>
+    <string name="title_main_activity"></string>
     <string name="title_activity_second">SecondActivity</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_about">AboutActivity</string>
