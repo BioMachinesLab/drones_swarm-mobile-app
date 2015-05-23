@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ProgressBar;
 
 import pt.iscte.drones_swarm_mobile_app.R;
 
@@ -34,7 +33,7 @@ public class SplashScreenActivity extends Activity {
                     // do nothing
                 } finally {
                     finish();
-                    Intent main = new Intent(SplashScreenActivity.this,SecondActivity.class);
+                    Intent main = new Intent(SplashScreenActivity.this,MenuActivity.class);
                     startActivity(main);
                 }
             }
