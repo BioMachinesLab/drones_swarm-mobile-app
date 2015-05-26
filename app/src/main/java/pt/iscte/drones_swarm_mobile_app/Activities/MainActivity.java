@@ -347,15 +347,12 @@ public class MainActivity extends ActionBarActivity {
                 textView_right_control.setText("Right Control \n" + String.valueOf(value_right_control) + "%");
 
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
         seekBar_right_control2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
