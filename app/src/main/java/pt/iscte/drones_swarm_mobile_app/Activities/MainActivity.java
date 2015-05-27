@@ -3,10 +3,12 @@ package pt.iscte.drones_swarm_mobile_app.Activities;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +28,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +43,6 @@ import pt.iscte.drones_swarm_mobile_app.R;
 
 
 public class MainActivity extends ActionBarActivity {
-
 
     //Bar Title
     private CharSequence mTitle;
@@ -61,6 +70,8 @@ public class MainActivity extends ActionBarActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
+        connectServer();
+
         setUpMapIfNeeded();
 
         setLeftMenu(savedInstanceState);
@@ -71,6 +82,9 @@ public class MainActivity extends ActionBarActivity {
 
         actionButtonsControl();
 
+    }
+    private void connectServer(){
+        Log.i("Connecting ",null);
     }
 
     private void setLeftMenu(Bundle savedInstanceState) {
