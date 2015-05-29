@@ -84,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
     private void connectServer(){
-        Log.i("Connecting ",null);
+
     }
 
     private void setLeftMenu(Bundle savedInstanceState) {
