@@ -1,9 +1,11 @@
-package pt.iscte.drones_swarm_mobile_app.Activities;
+package pt.iscte.drones_swarm_mobile_app.activity;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,9 +19,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import pt.iscte.drones_swarm_mobile_app.Menus.LeftMenu;
-import pt.iscte.drones_swarm_mobile_app.Menus.RightMenu;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+import pt.iscte.drones_swarm_mobile_app.menu.LeftMenu;
+import pt.iscte.drones_swarm_mobile_app.menu.RightMenu;
 import pt.iscte.drones_swarm_mobile_app.R;
+import pt.iscte.drones_swarm_mobile_app.network.ServerHandler;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -54,8 +62,8 @@ public class MainActivity extends ActionBarActivity {
         actionButtonsControl();
 
     }
-    private void connectServer(){
-
+        private void connectServer() {
+            new Thread(new ServerHandler(this)).start();
     }
 
 

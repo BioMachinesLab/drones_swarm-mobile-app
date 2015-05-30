@@ -1,4 +1,4 @@
-package pt.iscte.drones_swarm_mobile_app.Activities;
+package pt.iscte.drones_swarm_mobile_app.activity;
 
 import android.app.Activity;
 import android.content.Intent;

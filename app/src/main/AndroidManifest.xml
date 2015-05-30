@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Activities.SplashScreenActivity"
+            android:name=".activity.SplashScreenActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,12 +28,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".activity.MainActivity"
             android:theme="@style/MainActivity"
             android:label="@string/title_main_activity" >
         </activity>
         <activity
-            android:name=".Activities.MenuActivity"
+            android:name=".activity.MenuActivity"
             android:label="@string/title_activity_menu" >
         </activity>
 
@@ -45,12 +45,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Activities.AboutActivity"
+            android:name=".activity.AboutActivity"
             android:theme="@android:style/Theme.Translucent"
             android:label="@string/title_activity_about" >
         </activity>
         <activity
-            android:name=".Activities.ConfigureActivity"
+            android:name=".activity.ConfigureActivity"
             android:theme="@android:style/Theme.Translucent"
             android:label="@string/title_activity_configure" >
         </activity>

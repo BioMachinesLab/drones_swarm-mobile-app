@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Drones_swarm-mobile-app.iml" filepath="$PROJECT_DIR$/Drones_swarm-mobile-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/drones/drones.iml" filepath="$PROJECT_DIR$/drones/drones.iml" />
-      <module fileurl="file://$PROJECT_DIR$/drones_swarm-mobile-app.iml" filepath="$PROJECT_DIR$/drones_swarm-mobile-app.iml" />
     </modules>
   </component>
 </project>

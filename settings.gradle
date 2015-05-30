@@ -1,1 +1,1 @@
-include ':app', ':drones'
+include ':app'

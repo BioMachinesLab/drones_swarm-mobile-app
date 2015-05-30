@@ -1,4 +1,4 @@
-package pt.iscte.drones_swarm_mobile_app.Menus;
+package pt.iscte.drones_swarm_mobile_app.menu;
 
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;

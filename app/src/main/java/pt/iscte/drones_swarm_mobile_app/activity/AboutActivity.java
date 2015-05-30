@@ -1,10 +1,7 @@
-package pt.iscte.drones_swarm_mobile_app.Activities;
+package pt.iscte.drones_swarm_mobile_app.activity;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
