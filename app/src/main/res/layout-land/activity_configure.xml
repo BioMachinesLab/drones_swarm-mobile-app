@@ -17,8 +17,8 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:layout_marginTop="143dp" />
+        android:layout_marginBottom="65dp"
+        android:layout_marginTop="100dp" />
 
 
     <LinearLayout

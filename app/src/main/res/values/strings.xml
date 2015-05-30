@@ -51,10 +51,15 @@
     <string name="string_button_stop_all_right_menu">Stop All</string>
     <string name="string_button_send_log_right_menu">Send Log</string>
 
-    <!-- Second Activity-->
-    <string name="string_button_start_second_activity">Start</string>
-    <string name="string_button_configure_second_activity">Configure</string>
-    <string name="string_button_about_second_activity">About</string>
+    <!-- Menu Activity-->
+    <string name="string_button_start_menu_activity">Start</string>
+    <string name="string_button_configure_menu_activity">Configure</string>
+    <string name="string_button_about_menu_activity">About</string>
+
+    <!-- Configure Activity-->
+    <string name="string_textView_ip_configure_activity">ip</string>
+    <string name="string_textView_port_configure_activity">port</string>
+    <string name="string_button_update_configure_activity">Update</string>
 
     <!-- About Activity-->
     <string name="string_textView1_about_activity">Este projecto foi desenvolvido com a intenção de manipular drones aquáticos usando dispositivos Android, mais

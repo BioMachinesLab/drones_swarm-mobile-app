@@ -32,6 +32,9 @@ public class ConfigureActivity extends Activity {
         EditText editTextIP = (EditText) findViewById(R.id.editText_ip_configure_activity);
         editTextIP.setText( "192.168.2.1");
 
+        EditText editTextPort = (EditText) findViewById(R.id.editText_port_configure_activity);
+        editTextPort.setText( "60000");
+
         Button button_update = (Button) findViewById(R.id.button_update_configure_activity);
 
         button_update.setOnClickListener(new View.OnClickListener()
