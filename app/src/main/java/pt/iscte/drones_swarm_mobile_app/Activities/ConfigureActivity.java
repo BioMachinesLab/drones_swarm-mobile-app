@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -39,7 +40,7 @@ public class ConfigureActivity extends Activity {
         // ----------------FULLSCREEN WITH LAYOUT(END)-----------------//
 
         addListenerOnSpinnerItemSelection();
-        actionsButtons();
+        interactions();
     }
 
     public void addListenerOnSpinnerItemSelection() {
@@ -56,7 +57,7 @@ public class ConfigureActivity extends Activity {
         spinner_configure.setOnItemSelectedListener(new CustomOnItemSelectedListener());
     }
 
-    private void actionsButtons(){
+    private void interactions(){
         ImageButton button1 = (ImageButton) findViewById(R.id.button_1);
 
         button1.setOnClickListener(new View.OnClickListener()
@@ -68,6 +69,9 @@ public class ConfigureActivity extends Activity {
 
             }
         });
+
+        EditText editTextIP = (EditText) findViewById(R.id.textView_ip_configure_activity);
+        editTextIP.setText( "192.168.2.1");
 
     }
     public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {

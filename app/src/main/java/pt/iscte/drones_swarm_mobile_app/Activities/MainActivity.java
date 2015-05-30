@@ -251,7 +251,7 @@ public class MainActivity extends ActionBarActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(38.723827300000000000, -9.139769999999999000)).title("Teste ^^,"));
+        mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_about)).position(new LatLng(38.723827300000000000, -9.139769999999999000)).title("Teste ^^,"));
         moveToCurrentLocation(new LatLng(38.723827300000000000, -9.139769999999999000));
     }
     private void moveToCurrentLocation(LatLng currentLocation)
