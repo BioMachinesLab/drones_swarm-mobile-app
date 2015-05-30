@@ -28,8 +28,8 @@
         android:paddingLeft= "30dp"
         android:paddingRight= "30dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/imageView_second_activity"
-        android:layout_marginTop="120dp" />
+        android:layout_below="@+id/imageView_second_activity" />
+       <!-- android:layout_marginTop="120dp" -->
 
     <Button
         android:id="@+id/button_configure_second_activity"

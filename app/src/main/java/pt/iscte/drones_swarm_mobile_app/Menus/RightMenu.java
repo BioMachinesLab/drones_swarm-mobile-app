@@ -1,6 +1,5 @@
 package pt.iscte.drones_swarm_mobile_app.Menus;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
