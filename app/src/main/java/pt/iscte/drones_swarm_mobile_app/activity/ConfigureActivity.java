@@ -81,11 +81,11 @@ public class ConfigureActivity extends Activity {
         button_update.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
                     if (validateIP(editTextIP, editTextIP.getText()) && validatePort(editTextPort, editTextPort.getText())) {
                         Toast.makeText(ConfigureActivity.this, "Data updated!", Toast.LENGTH_SHORT).show();
                         ServerHandler.setServerIP(editTextIP.getText().toString());
                         ServerHandler.setPort(Integer.parseInt(editTextPort.getText().toString()));
+                        finish();
                     }
                     else
                         Toast.makeText(ConfigureActivity.this, "Verify the input values!", Toast.LENGTH_SHORT).show();
