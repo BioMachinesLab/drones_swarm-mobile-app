@@ -1,7 +1,6 @@
 package pt.iscte.drones_swarm_mobile_app.network;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,15 +11,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import network.server.messages.DronesInformationRequest;
-import network.server.messages.NetworkMessage;
+import network.server.shared.messages.DronesInformationRequest;
+import network.server.shared.messages.NetworkMessage;
 
 /**
  * Created by HugoSousa on 30-05-2015.
  */
 public final class ServerHandler implements Runnable{
     private final Activity context;
-    private static String serverIP;
+    private static String serverIP = "192.168.0.11";
 
     public ServerHandler(Activity context) {
         this.context = context;
@@ -34,7 +33,7 @@ public final class ServerHandler implements Runnable{
     public void run() {
         while (true) {
             try {
-                Socket s = new Socket("172.17.20.69", 60000);
+                Socket s = new Socket(serverIP, 60000);
                 ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
                 try {
@@ -46,9 +45,9 @@ public final class ServerHandler implements Runnable{
                             Log.i("SH-INFORMATION", request.getMessageType().toString());
                     }
                 } catch (IOException e1) {
-                    Toast.makeText(context, "Connection to server lost", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Connection to server lost", Toast.LENGTH_SHORT).show();
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(8000);
                     } catch (InterruptedException e) {
 
                     }
@@ -56,9 +55,9 @@ public final class ServerHandler implements Runnable{
                     Log.e("SH-NETWORK", "ClassNotFound: " + e.getMessage());
                 }
             } catch (IOException e) {
-                Toast.makeText(context, "Could not connect to Server", Toast.LENGTH_SHORT);
+                Toast.makeText(context, "Could not connect to Server", Toast.LENGTH_SHORT).show();
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(8000);
                 } catch (InterruptedException e1) {
 
                 }

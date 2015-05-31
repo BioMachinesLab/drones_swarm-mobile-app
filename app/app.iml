@@ -106,6 +106,7 @@
     <orderEntry type="library" exported="" name="play-services-fitness-7.3.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-plus-7.3.0" level="project" />
+    <orderEntry type="library" exported="" name="joda-time-2.3" level="project" />
     <orderEntry type="library" exported="" name="play-services-wearable-7.3.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-appstate-7.3.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-games-7.3.0" level="project" />
