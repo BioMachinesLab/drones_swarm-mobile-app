@@ -63,6 +63,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
         private void connectServer() {
+            Log.i("SH-START", "starting");
             new Thread(new ServerHandler(this)).start();
     }
 
