@@ -19,7 +19,8 @@ import network.server.shared.messages.NetworkMessage;
  */
 public final class ServerHandler implements Runnable{
     private final Activity context;
-    private static String serverIP = "192.168.0.11";
+    private static String serverIP = "192.168.3.250";
+    private static int port = 10110;
 
     public ServerHandler(Activity context) {
         this.context = context;
@@ -29,11 +30,15 @@ public final class ServerHandler implements Runnable{
         ServerHandler.serverIP = serverIP;
     }
 
+    public static void setPort(int port) {
+        ServerHandler.port = port;
+    }
+
     @Override
     public void run() {
         while (true) {
             try {
-                Socket s = new Socket(serverIP, 60000);
+                Socket s = new Socket(serverIP, port);
                 ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
                 try {
@@ -46,6 +51,7 @@ public final class ServerHandler implements Runnable{
                     }
                 } catch (IOException e1) {
                     Toast.makeText(context, "Connection to server lost", Toast.LENGTH_SHORT).show();
+                    Log.i("SH-TOAST", "mr toasty toast 0");
                     try {
                         Thread.sleep(8000);
                     } catch (InterruptedException e) {
@@ -56,6 +62,7 @@ public final class ServerHandler implements Runnable{
                 }
             } catch (IOException e) {
                 Toast.makeText(context, "Could not connect to Server", Toast.LENGTH_SHORT).show();
+                Log.i("SH-TOAST", "mr toasty toast 0");
                 try {
                     Thread.sleep(8000);
                 } catch (InterruptedException e1) {
