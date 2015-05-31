@@ -9,7 +9,6 @@
     <string name="title_activity_about">About</string>
     <string name="title_activity_configure">Configure</string>
 
-
     <!-- Main Activity-->
     <!-- Left Menu-->
     <string name="string_textView_battery_status_header">Battery Status</string>
@@ -57,8 +56,8 @@
     <string name="string_button_about_menu_activity">About</string>
 
     <!-- Configure Activity-->
-    <string name="string_textView_ip_configure_activity">ip</string>
-    <string name="string_textView_port_configure_activity">port</string>
+    <string name="string_textView_ip_configure_activity">IP</string>
+    <string name="string_textView_port_configure_activity">Port</string>
     <string name="string_button_update_configure_activity">Update</string>
 
     <!-- About Activity-->
@@ -72,6 +71,5 @@
         \n Rúdi Luis      nº54419
         \n Vasco Costa    nº54388
     </string>
-
 
 </resources>
