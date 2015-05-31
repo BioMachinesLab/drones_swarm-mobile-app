@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Drones-swarm-mobile-app</string>
+    <string name="app_name">DroneCommander</string>
 
     <string name="action_settings">Settings</string>
     <string name="drawer_open">Open drawer</string>
