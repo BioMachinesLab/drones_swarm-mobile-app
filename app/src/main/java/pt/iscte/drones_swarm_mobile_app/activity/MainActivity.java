@@ -257,6 +257,9 @@ public class MainActivity extends ActionBarActivity {
         mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(latitude, longitude)).title("Drone"));
         moveToCurrentLocation(new LatLng(latitude, longitude));
     }
+    public void clearMarkers(){
+        mMap.clear();
+    }
     private void moveToCurrentLocation(LatLng currentLocation)
     {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,18));

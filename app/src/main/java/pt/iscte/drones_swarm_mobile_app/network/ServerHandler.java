@@ -159,15 +159,17 @@ public final class ServerHandler implements Runnable {
 
     private void handleDronesInformationResponse(DronesInformationResponse message) {
         if(message.dronesData.size() != 1){
+            //Drones
+            addListenerOnSpinnerItemSelectionLeft_menu_drone(message);
 
-            //mudar a combo box da lista de drones para os drones que vem na message
-            //update
         }
         //set informações drone selecionado
         setLeftMenuValues(message);
         setRightMenuValues(message);
 
+        context.clearMarkers();
         context.addMarker(message.dronesData.get(0).getRobotLocation().getLatitude(), message.dronesData.get(0).getRobotLocation().getLongitude());
+
     }
 
     private void setRightMenuValues(DronesInformationResponse message) {
@@ -318,8 +320,6 @@ public final class ServerHandler implements Runnable {
 
     private void setLeftMenuValues(DronesInformationResponse message) {
         // Set Left Menu
-        //Drones
-        addListenerOnSpinnerItemSelectionLeft_menu_drone(message);
 
         //Battery Status
         TextView textView_percentage1 = (TextView) context.findViewById(R.id.textView_percentage1);
@@ -382,6 +382,10 @@ public final class ServerHandler implements Runnable {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
             setSelectedDroneIdentification(dronesData.get(pos).getName());
+
+            context.clearMarkers();
+            context.addMarker(dronesData.get(0).getRobotLocation().getLatitude(), dronesData.get(0).getRobotLocation().getLongitude());
+
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
         }
 
