@@ -61,15 +61,15 @@
     <string name="string_button_update_configure_activity">Update</string>
 
     <!-- About Activity-->
-    <string name="string_textView1_about_activity">Este projecto foi desenvolvido com a intenção de manipular drones aquáticos usando dispositivos Android, mais
-        concretamente Tablet(s). \n Foi desenvolvido para a disciplina Desenvolvimento de Aplicações para Ambientes Móveis orientada pelo professor Carlos Serrão.
-    </string>
-    <string name="string_textView2_about_activity">O grupo que fez a aplicação é constituído por cinco elementos do primeiro ano do Mestrado em Engenharia Informática:
-        \n Filipe Martins nº55653
-        \n João Paulino   nº54394
-        \n Hugo Sousa     nº38068
-        \n Rúdi Luis      nº54419
-        \n Vasco Costa    nº54388
+    <string name="string_textView1_about_activity">This application was developed integrated on CORATAM research project, developed by BiomachinesLab, at ISCTE-IUL, and in the context of
+        "Application development for mobile environments” subject, lectured by Professor Carlos Serrão, Ph.D. \n It consists on a remote control application that allows the user to get
+        information from the aquatic drones developed in project.</string>
+    <string name="string_textView2_about_activity">This project was developed by the following five student of Masters on Computer Sciences, at ISCTE-IUL:
+        \n Filipe Martins (55653)
+        \n João Paulino   (54394)
+        \n Hugo Sousa     (38068)
+        \n Rúdi Luis      (54419)
+        \n Vasco Costa    (54388)
     </string>
 
 </resources>
