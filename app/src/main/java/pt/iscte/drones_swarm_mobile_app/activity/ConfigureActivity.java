@@ -78,14 +78,19 @@ public class ConfigureActivity extends Activity {
 
         Button button_update = (Button) findViewById(R.id.button_update_configure_activity);
 
-        button_update.setOnClickListener(v -> {
-                if (validateIP(editTextIP, editTextIP.getText()) && validatePort(editTextPort, editTextPort.getText())) {
-                    Toast.makeText(ConfigureActivity.this, "Data updated!", Toast.LENGTH_SHORT).show();
-                    ServerHandler.setServerIP(editTextIP.getText().toString());
-                    ServerHandler.setPort(Integer.parseInt(editTextPort.getText().toString()));
-                }
-                else
-                    Toast.makeText(ConfigureActivity.this, "Verify the input values!", Toast.LENGTH_SHORT).show();
+        button_update.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                    if (validateIP(editTextIP, editTextIP.getText()) && validatePort(editTextPort, editTextPort.getText())) {
+                        Toast.makeText(ConfigureActivity.this, "Data updated!", Toast.LENGTH_SHORT).show();
+                        ServerHandler.setServerIP(editTextIP.getText().toString());
+                        ServerHandler.setPort(Integer.parseInt(editTextPort.getText().toString()));
+                    }
+                    else
+                        Toast.makeText(ConfigureActivity.this, "Verify the input values!", Toast.LENGTH_SHORT).show();
+
+            }
         });
 
     }
