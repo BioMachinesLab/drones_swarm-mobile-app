@@ -2,7 +2,6 @@ package pt.iscte.drones_swarm_mobile_app.activity;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -19,14 +18,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-
+import pt.iscte.drones_swarm_mobile_app.R;
 import pt.iscte.drones_swarm_mobile_app.menu.LeftMenu;
 import pt.iscte.drones_swarm_mobile_app.menu.RightMenu;
-import pt.iscte.drones_swarm_mobile_app.R;
 import pt.iscte.drones_swarm_mobile_app.network.ServerHandler;
 
 
@@ -249,7 +243,7 @@ public class MainActivity extends ActionBarActivity {
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                setUpMap();
+                //setUpMap();
             }
         }
     }
@@ -259,9 +253,9 @@ public class MainActivity extends ActionBarActivity {
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-    private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(38.723827300000000000, -9.139769999999999000)).title("Teste ^^,"));
-        moveToCurrentLocation(new LatLng(38.723827300000000000, -9.139769999999999000));
+    public void addMarker(double latitude, double longitude) {
+        mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(latitude, longitude)).title("Drone"));
+        moveToCurrentLocation(new LatLng(latitude, longitude));
     }
     private void moveToCurrentLocation(LatLng currentLocation)
     {
