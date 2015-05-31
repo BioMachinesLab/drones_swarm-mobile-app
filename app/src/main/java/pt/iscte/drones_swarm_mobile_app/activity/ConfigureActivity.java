@@ -16,7 +16,6 @@ import pt.iscte.drones_swarm_mobile_app.R;
 
 public class ConfigureActivity extends Activity {
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +31,32 @@ public class ConfigureActivity extends Activity {
 
 
     private void interactions(){
+
         final EditText editTextIP = (EditText) findViewById(R.id.editText_ip_configure_activity);
-        editTextIP.setText( "192.168.3.250");
+        editTextIP.setText("192.168.3.250");
 
         editTextIP.addTextChangedListener(new TextWatcher() {
-            private String mPreviousText = "";
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                validateIP(editTextIP, s);
+            }
+        });
+
+
+        final EditText editTextPort = (EditText) findViewById(R.id.editText_port_configure_activity);
+        editTextPort.setText("10110");
+
+        editTextPort.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -48,21 +68,12 @@ public class ConfigureActivity extends Activity {
             }
 
 
-
             @Override
             public void afterTextChanged(Editable s) {
-                if (Patterns.IP_ADDRESS.matcher(s).matches()) {
-                    editTextIP.setBackgroundDrawable(getResources().getDrawable(R.drawable.borders_about_configure_activity));
-                    mPreviousText = s.toString();
-                } else {
-                    editTextIP.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_ip_invalid_configure_activity));
-                }
+                validatePort(editTextPort, s);
             }
         });
 
-
-        EditText editTextPort = (EditText) findViewById(R.id.editText_port_configure_activity);
-        editTextPort.setText( "10110");
 
         Button button_update = (Button) findViewById(R.id.button_update_configure_activity);
 
@@ -71,11 +82,33 @@ public class ConfigureActivity extends Activity {
         {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ConfigureActivity.this, "Entrou no botao update!", Toast.LENGTH_SHORT).show();
+
+                    if (validateIP(editTextIP, editTextIP.getText()) && validatePort(editTextPort, editTextPort.getText()))
+                        Toast.makeText(ConfigureActivity.this, "Data updated!", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(ConfigureActivity.this, "Verify the input values!", Toast.LENGTH_SHORT).show();
 
             }
         });
 
+    }
+    private boolean validateIP(EditText editTextIP, Editable s){
+        if (Patterns.IP_ADDRESS.matcher(s).matches()) {
+            editTextIP.setBackgroundDrawable(getResources().getDrawable(R.drawable.borders_about_configure_activity));
+            return true;
+        } else {
+            editTextIP.setBackgroundDrawable(getResources().getDrawable(R.drawable.fields_invalid_configure_activity));
+            return false;
+        }
+    }
+    private boolean validatePort(EditText editTextPort,Editable s){
+        if (s.length() == 0 || Integer.valueOf(s.toString()) > 65535) {
+            editTextPort.setBackgroundDrawable(getResources().getDrawable(R.drawable.fields_invalid_configure_activity));
+            return  false;
+        } else {
+            editTextPort.setBackgroundDrawable(getResources().getDrawable(R.drawable.borders_about_configure_activity));
+            return true;
+        }
     }
 
     @Override
