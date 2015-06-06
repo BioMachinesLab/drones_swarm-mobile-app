@@ -8,8 +8,15 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,6 +25,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import network.server.shared.dataObjects.DroneData;
+import network.server.shared.messages.DronesInformationResponse;
 import pt.iscte.drones_swarm_mobile_app.R;
 import pt.iscte.drones_swarm_mobile_app.menu.LeftMenu;
 import pt.iscte.drones_swarm_mobile_app.menu.RightMenu;
@@ -32,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
     private LeftMenu leftMenu;
     private RightMenu rightMenu;
     private boolean isOpenRightMenu = false;
+    private ServerHandler serverHandler;
 
     //Google Maps
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -54,11 +67,12 @@ public class MainActivity extends ActionBarActivity {
         setUpMapIfNeeded();
 
         actionButtonsControl();
-
+        addListenerOnSpinnerItemSelectionLeft_menu_refreshrate();
     }
         private void connectServer() {
             Log.i("SH-START", "starting");
-            new Thread(new ServerHandler(this)).start();
+            serverHandler = new ServerHandler(this);
+            new Thread(serverHandler).start();
     }
 
 
@@ -219,7 +233,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
@@ -253,21 +266,315 @@ public class MainActivity extends ActionBarActivity {
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-    public void addMarker(double latitude, double longitude) {
-        mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(latitude, longitude)).title("Drone"));
-        moveToCurrentLocation(new LatLng(latitude, longitude));
+    public void addMarker(final double latitude, final double longitude) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(latitude, longitude)).title("Drone"));
+                moveToCurrentLocation(new LatLng(latitude, longitude));
+            }
+        });
+
     }
     public void clearMarkers(){
-        mMap.clear();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mMap.clear();
+            }
+        });
+
     }
-    private void moveToCurrentLocation(LatLng currentLocation)
-    {
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,18));
+
+    private void moveToCurrentLocation(LatLng currentLocation) {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 18));
         // Zoom in, animating the camera.
         mMap.animateCamera(CameraUpdateFactory.zoomIn());
         // Zoom out to zoom level 10, animating with a duration of 2 seconds.
         mMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
+    }
 
+    public void setRightMenuValues(DronesInformationResponse message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //Right Menu
+                //Seekbars speed limit and motor offset
+
+                SeekBar seekBar_speed_limit = (SeekBar)findViewById(R.id.seekbar_speed_limit_right_menu);
+                final TextView speed_limit_value = (TextView) findViewById(R.id.textView_speed_limit_value);
+
+                seekBar_speed_limit.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,
+                                                  boolean fromUser) {
+                        speed_limit_value.setText(String.valueOf(progress));
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        seekBar.setSecondaryProgress(seekBar.getProgress());
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+
+                SeekBar seekBar_motor_offset = (SeekBar) findViewById(R.id.seekbar_motor_offset_right_menu);
+                final TextView motor_offset_value = (TextView) findViewById(R.id.textView_motor_offset_value);
+
+                seekBar_motor_offset.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,
+                                                  boolean fromUser) {
+
+                        motor_offset_value.setText(String.valueOf(progress - 100));
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        seekBar.setSecondaryProgress(seekBar.getProgress());
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+                //Commands
+                addListenerOnSpinnerItemSelectionRight_menu_commands();
+
+                //Commands Caixa de texto
+                EditText editText_commands = (EditText) findViewById(R.id.editText_commands);
+                editText_commands.setText("Estou escrevendo aqui mas posso alterar para enviar comandos!");
+
+                //Buttons
+                Button button_start_right_menu = (Button) findViewById(R.id.button_start_right_menu);
+                button_start_right_menu.setOnClickListener(new View.OnClickListener()
+
+                {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this,
+                                "Button button_start_right_menu",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                Button button_stop_right_menu = (Button) findViewById(R.id.button_stop_right_menu);
+                button_stop_right_menu.setOnClickListener(new View.OnClickListener()
+
+                {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this,
+                                "Button button_stop_right_menu",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                Button button_deploy_right_menu = (Button) findViewById(R.id.button_deploy_right_menu);
+                button_deploy_right_menu.setOnClickListener(new View.OnClickListener()
+
+                {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this,
+                                "Button button_deploy_right_menu",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                Button button_stop_all_right_menu = (Button) findViewById(R.id.button_stop_all_right_menu);
+                button_stop_all_right_menu.setOnClickListener(new View.OnClickListener()
+
+                {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this,
+                                "Button button_stop_all_right_menu",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                EditText editText_buttons = (EditText) findViewById(R.id.editText_buttons);
+                editText_buttons.setText("Teste Teste Teste");
+                Button button_send_log_right_menu = (Button) findViewById(R.id.button_send_log_right_menu);
+                button_send_log_right_menu.setOnClickListener(new View.OnClickListener()
+
+                {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this,
+                                "Button button_send_log_right_menu",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    public void addListenerOnSpinnerItemSelectionRight_menu_commands() {
+        Spinner spinner_configure = (Spinner) findViewById(R.id.spinner_right_menu_commands);
+
+        List<String> list = new ArrayList<String>();
+        list.add("class behaviors.CalibrationCIBehavior");
+        list.add("class behaviors.Test");
+        list.add("class behaviors.TestTestTest");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(MainActivity.this,
+                R.layout.spinner_item_commands, list);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_configure.setAdapter(dataAdapter);
+        spinner_configure.setOnItemSelectedListener(new CustomOnItemSelectedListenerRight_menu_commands());
+    }
+
+    public class CustomOnItemSelectedListenerRight_menu_commands implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+
+        }
+
+    }
+
+    public void setLeftMenuValues(final DronesInformationResponse message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Set Left Menu
+                //Drones
+                addListenerOnSpinnerItemSelectionLeft_menu_drone(message);
+
+                //Battery Status
+                TextView textView_percentage1 = (TextView) findViewById(R.id.textView_percentage1);
+                textView_percentage1.setText("100%");
+                TextView textView_percentage2 = (TextView) findViewById(R.id.textView_percentage2);
+                textView_percentage2.setText("95%");
+                TextView textView_percentage3 = (TextView) findViewById(R.id.textView_percentage3);
+                textView_percentage3.setText("3%");
+
+                //Gps Data
+                TextView textView_hasfix_details_gps_data = (TextView) findViewById(R.id.textView_hasfix_details_gps_data);
+                textView_hasfix_details_gps_data.setText("Has Fix -> " + message.dronesData.get(0).getGPSData().getFixType());
+
+                TextView textView_latitude_details_gps_data = (TextView) findViewById(R.id.textView_latitude_details_gps_data);
+                textView_latitude_details_gps_data.setText("Latitude -> " + message.dronesData.get(0).getGPSData().getLatitude());
+
+                TextView textView_longitude_details_gps_data = (TextView) findViewById(R.id.textView_longitude_details_gps_data);
+                textView_longitude_details_gps_data.setText("Longitude -> " + message.dronesData.get(0).getGPSData().getLongitude());
+
+                TextView textView_velocity_details_gps_data = (TextView) findViewById(R.id.textView_velocity_details_gps_data);
+                textView_velocity_details_gps_data.setText("Vel.(Km/h) -> " + message.dronesData.get(0).getGPSData().getGroundSpeedKmh());
+
+                TextView textView_time_details_gps_data = (TextView) findViewById(R.id.textView_time_details_gps_data);
+                textView_time_details_gps_data.setText("Time -> " + message.dronesData.get(0).getGPSData().getDate());
+
+                TextView textView_satview_details_gps_data = (TextView) findViewById(R.id.textView_satview_details_gps_data);
+                textView_satview_details_gps_data.setText("Sat.View -> " + message.dronesData.get(0).getGPSData().getNumberOfSatellitesInView());
+
+                TextView textView_satused_details_gps_data = (TextView) findViewById(R.id.textView_satused_details_gps_data);
+                textView_satused_details_gps_data.setText("Sat.Used -> " + message.dronesData.get(0).getGPSData().getNumberOfSatellitesInUse());
+
+                TextView textView_hdop_details_gps_data = (TextView) findViewById(R.id.textView_hdop_details_gps_data);
+                textView_hdop_details_gps_data.setText("HDOP -> " + message.dronesData.get(0).getGPSData().getHDOP());
+
+                TextView textView_pdop_details_gps_data = (TextView) findViewById(R.id.textView_pdop_details_gps_data);
+                textView_pdop_details_gps_data.setText("PDOP -> " + message.dronesData.get(0).getGPSData().getPDOP());
+
+                TextView textView_vdop_details_gps_data = (TextView) findViewById(R.id.textView_vdop_details_gps_data);
+                textView_vdop_details_gps_data.setText("VDOP -> " + message.dronesData.get(0).getGPSData().getVDOP());
+
+                //Drone Messages
+                TextView textView_drone_messages = (TextView) findViewById(R.id.textView_drone_messages);
+                textView_drone_messages.setText(message.dronesData.get(0).getSystemStatusMessage());
+            }
+        });
+    }
+
+    public void addListenerOnSpinnerItemSelectionLeft_menu_drone(final DronesInformationResponse message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Spinner spinner_configure = (Spinner) findViewById(R.id.spinner_left_menu_drone);
+
+                List<String> list = new ArrayList<String>();
+                if(message.dronesData != null && !message.dronesData.isEmpty() && message.dronesData.get(0) == null)
+                    Log.i("MAIN-OMG", "Commit suicide");
+                if(message.dronesData != null) {
+                    for (DroneData droneData : message.dronesData)
+                        if (droneData != null)
+                            list.add(droneData.getName());
+                        else
+                            Log.e("DRONEDATA", "Drone data came with a null name");
+                }else
+                    Log.e("DRONEDATA", "message cam with null drone data");
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(MainActivity.this,
+                        android.R.layout.simple_spinner_item, list);
+                dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                spinner_configure.setAdapter(dataAdapter);
+                spinner_configure.setOnItemSelectedListener(new CustomOnItemSelectedListenerLeft_menu_drone());
+            }
+        });
+    }
+    private class CustomOnItemSelectedListenerLeft_menu_drone implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            serverHandler.setSelectedDroneIdentification(serverHandler.getDronesData().get(pos).getName());
+            Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+
+        }
+
+    }
+
+
+    private void addListenerOnSpinnerItemSelectionLeft_menu_refreshrate() {
+        Spinner spinner_configure = (Spinner) findViewById(R.id.spinner_left_menu_refresh_rate);
+
+        List<String> list = new ArrayList<String>();
+        list.add("0.1 Hz");
+        list.add("0.2 Hz");
+        list.add("0.3 Hz");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(MainActivity.this,
+                R.layout.spinner_item, list);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_configure.setAdapter(dataAdapter);
+        spinner_configure.setOnItemSelectedListener(new CustomOnItemSelectedListenerLeft_menu_refreshrate());
+    }
+
+    private class CustomOnItemSelectedListenerLeft_menu_refreshrate implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            int sleepMillis = -1;
+            switch (pos){
+                case 0:
+                    sleepMillis = 10000;
+                    break;
+                case 1:
+                    sleepMillis = 20000;
+                    break;
+                case 2:
+                    sleepMillis = 30000;
+                    break;
+            }
+            serverHandler.setSleepMillis(sleepMillis);
+            Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+
+        }
 
     }
 
