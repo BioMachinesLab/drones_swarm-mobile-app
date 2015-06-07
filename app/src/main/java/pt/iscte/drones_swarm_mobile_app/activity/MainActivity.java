@@ -446,6 +446,7 @@ public class MainActivity extends ActionBarActivity {
     public class CustomOnItemSelectedListenerRight_menu_commands implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            Log.e("POS-ID", pos+" "+id);
             serverHandler.setSelectedDroneIndex(pos);
             DroneData data = serverHandler.getDronesData().get(pos);
             setLeftMenuValues(data);
