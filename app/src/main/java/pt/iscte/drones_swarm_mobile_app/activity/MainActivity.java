@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import network.server.shared.dataObjects.DroneData;
-import network.server.shared.messages.DronesInformationResponse;
 import pt.iscte.drones_swarm_mobile_app.R;
 import pt.iscte.drones_swarm_mobile_app.menu.LeftMenu;
 import pt.iscte.drones_swarm_mobile_app.menu.RightMenu;
@@ -266,16 +265,29 @@ public class MainActivity extends ActionBarActivity {
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-    public void addMarker(final double latitude, final double longitude) {
+    public void addMarker(final double latitude, final double longitude, final boolean isSelected) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(latitude, longitude)).title("Drone"));
-                moveToCurrentLocation(new LatLng(latitude, longitude));
+                if(isSelected)
+                    mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_select)).position(new LatLng(latitude, longitude)).title("Drone"));
+                else
+                    mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(latitude, longitude)).title("Drone"));
+
             }
         });
 
     }
+
+    public void centerMap(final double latitude, final double longitude){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                moveToCurrentLocation(new LatLng(latitude, longitude));
+            }
+        });
+    }
+
     public void clearMarkers(){
         runOnUiThread(new Runnable() {
             @Override
@@ -439,7 +451,9 @@ public class MainActivity extends ActionBarActivity {
             setLeftMenuValues(data);
             setRightMenuValues(data);
             clearMarkers();
-            addMarker(data.getGPSData().getLatitudeDecimal(), data.getGPSData().getLongitudeDecimal());
+            for (int i = 0; i < serverHandler.getDronesData().size(); i++) {
+                addMarker(data.getGPSData().getLatitudeDecimal(), data.getGPSData().getLongitudeDecimal(), i == serverHandler.getSelectedDroneIndex());
+            }
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
         }
 
@@ -584,4 +598,9 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        serverHandler.finish();
+        super.onDestroy();
+    }
 }

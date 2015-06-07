@@ -165,9 +165,11 @@ public final class ServerHandler implements Runnable {
     private void handleDronesInformationResponse(final DronesInformationResponse message) {
         if(!message.dronesData.isEmpty()) {
             //Drones
+            boolean newList = false;
             if(dronesData == null || message.dronesData.size() != dronesData.size()){
                 selectedDroneIndex = 0;
                 context.addListenerOnSpinnerItemSelectionLeft_menu_drone(message.dronesData);
+                newList = true;
             }
             dronesData = message.dronesData;
             //set informacoes drone selecionado
@@ -178,9 +180,14 @@ public final class ServerHandler implements Runnable {
                 @Override
                 public void run() {
                     context.clearMarkers();
-                    context.addMarker(message.dronesData.get(selectedDroneIndex).getGPSData().getLatitudeDecimal(), message.dronesData.get(selectedDroneIndex).getGPSData().getLongitudeDecimal());
+                    for (int i = 0; i < message.dronesData.size(); i++) {
+                        context.addMarker(message.dronesData.get(i).getGPSData().getLatitudeDecimal(), message.dronesData.get(i).getGPSData().getLongitudeDecimal(), i == selectedDroneIndex);
+                    }
+
                 }
             });
+            if(newList)
+                context.centerMap(message.dronesData.get(selectedDroneIndex).getGPSData().getLatitudeDecimal(), message.dronesData.get(selectedDroneIndex).getGPSData().getLongitudeDecimal());
         }
     }
 
@@ -219,5 +226,9 @@ public final class ServerHandler implements Runnable {
 
     public int getSelectedDroneIndex() {
         return selectedDroneIndex;
+    }
+
+    public void finish() {
+        finished = true;
     }
 }
