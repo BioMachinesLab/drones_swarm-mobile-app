@@ -439,7 +439,7 @@ public class MainActivity extends ActionBarActivity {
             setLeftMenuValues(data);
             setRightMenuValues(data);
             clearMarkers();
-            addMarker(data.getRobotLocation().getLatitude(), data.getRobotLocation().getLongitude());
+            addMarker(data.getGPSData().getLatitudeDecimal(), data.getGPSData().getLongitudeDecimal());
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
         }
 
