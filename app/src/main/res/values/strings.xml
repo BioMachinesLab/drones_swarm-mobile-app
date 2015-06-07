@@ -36,7 +36,7 @@
     <string name="string_textView_drone_messages_header">Drone Messages</string>
 
     <!-- Right Menu-->
-    <string name="string_textView_about_header">About</string>
+    <string name="string_textView_motor_settings_header">Motors Settings</string>
     <string name="string_textView_speed_limit">Speed Limit</string>
     <string name="string_textView_speed_limit_value">100</string>
     <string name="string_textView_motor_offset">Motor Offset</string>
@@ -47,6 +47,7 @@
     <string name="string_button_start_right_menu">Start</string>
     <string name="string_button_stop_right_menu">Stop</string>
     <string name="string_button_deploy_right_menu">Deploy</string>
+    <string name="string_button_deploy_entities_right_menu">Deploy Entities</string>
     <string name="string_button_stop_all_right_menu">Stop All</string>
     <string name="string_button_send_log_right_menu">Send Log</string>
 

@@ -24,6 +24,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import network.server.shared.dataObjects.DroneData;
 import network.server.shared.dataObjects.ServerStatusData;
@@ -86,12 +87,12 @@ public final class ServerHandler implements Runnable {
                 final ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 
                 try {
-                    oos.writeObject(InetAddress.getLocalHost().getHostName());
+                    oos.writeObject("mobileclient"+ new Random().nextInt(20));
                     //Fazer pedidos inicias ao servidor
                     ServerStatusRequest serverStatusRequest = new ServerStatusRequest();
                     sendMessage(serverStatusRequest);
 
-                    NetworkMessage ssr = getNextRecievedMessage(ois);
+                    //NetworkMessage ssr = getNextRecievedMessage(ois);
                     ServerStatusData serverStatusData = null;
                     DronesInformationRequest dronesInformationRequest = new DronesInformationRequest();
                     sendMessage(dronesInformationRequest);
@@ -102,9 +103,10 @@ public final class ServerHandler implements Runnable {
                             try {
                                 while(!finished) {
                                     NetworkMessage networkMessage = getNextRecievedMessage(ois);
+
                                     switch (networkMessage.getMsgType()){
                                         case DronesInformationResponse:
-                                            handleDronesInformationResponse((DronesInformationResponse)networkMessage.getMessage());
+                                            handleDronesInformationResponse((DronesInformationResponse) networkMessage.getMessage());
                                             break;
                                         case ServerStatusResponse:
                                             handleServerStatusResponse((ServerStatusResponse) networkMessage.getMessage());
@@ -126,8 +128,6 @@ public final class ServerHandler implements Runnable {
                 } catch (IOException e1) {
                     makeShortToastAndQuit("Connection to server lost");
                     Log.i("SH-TOAST", "mr toasty toast 0");
-                } catch (ClassNotFoundException e) {
-                    Log.e("SH-NETWORK", "ClassNotFound: " + e.getMessage());
                 } finally {
                     s.close();
                     ois.close();
@@ -159,7 +159,11 @@ public final class ServerHandler implements Runnable {
     }
 
     private void handleServerStatusResponse(ServerStatusResponse message) {
-
+        Log.e("SH-MSG", "Handling ServerStatusResponse");
+        ArrayList<String> temp = new ArrayList<String>();
+        temp.add("");
+        temp.addAll(message.getServerStatusData().getAvailableControllers());
+        context.setRightMenuValues(message.getServerStatusData().getAvailableBehaviors(),temp);
     }
 
     private void handleDronesInformationResponse(final DronesInformationResponse message) {
@@ -175,13 +179,12 @@ public final class ServerHandler implements Runnable {
             //set informacoes drone selecionado
             DroneData data = message.dronesData.get(selectedDroneIndex);
             context.setLeftMenuValues(dronesData.get(selectedDroneIndex));
-            context.setRightMenuValues(dronesData.get(selectedDroneIndex));
             context.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     context.clearMarkers();
                     for (int i = 0; i < message.dronesData.size(); i++) {
-                        context.addMarker(message.dronesData.get(i).getGPSData().getLatitudeDecimal(), message.dronesData.get(i).getGPSData().getLongitudeDecimal(), i == selectedDroneIndex);
+                        context.addMarker(message.dronesData.get(i).getGPSData().getLatitudeDecimal(), message.dronesData.get(i).getGPSData().getLongitudeDecimal(), i == selectedDroneIndex, (message.dronesData.get(i).getName()));
                     }
                 }
             });

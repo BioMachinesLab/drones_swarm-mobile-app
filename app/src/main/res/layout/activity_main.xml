@@ -636,7 +636,7 @@
                 android:textColor="#fff"
                 android:paddingTop="12dp"
                 android:layout_marginLeft="10dp"
-                android:text="@string/string_textView_about_header"/>
+                android:text="@string/string_textView_motor_settings_header"/>
 
             <View
                 android:id="@+id/line5"
@@ -785,8 +785,25 @@
                 android:background="@android:color/darker_gray"/>
 
             <LinearLayout
-                android:id="@+id/layout_commands_right_menu"
-                android:layout_below="@+id/line6"
+            android:id="@+id/layout_commands_right_menu"
+            android:layout_below="@+id/line6"
+            android:background="@layout/customborder"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Spinner
+                android:id="@+id/spinner_right_menu_commands"
+                android:layout_width="fill_parent"
+                android:popupBackground="#605e5e"
+                android:layout_height="fill_parent"/>
+             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_configuration_right_menu"
+                android:layout_below="@+id/layout_commands_right_menu"
                 android:background="@layout/customborder"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
@@ -795,15 +812,16 @@
                 android:layout_height="fill_parent">
 
                 <Spinner
-                    android:id="@+id/spinner_right_menu_commands"
+                    android:id="@+id/spinner_right_menu_configuration"
                     android:layout_width="fill_parent"
                     android:popupBackground="#605e5e"
                     android:layout_height="fill_parent"/>
             </LinearLayout>
 
+
             <ScrollView
                 android:id="@+id/scrollView_commands"
-                android:layout_below="@+id/layout_commands_right_menu"
+                android:layout_below="@+id/layout_configuration_right_menu"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginTop="8dp"
@@ -881,6 +899,24 @@
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <Button
+                    android:id="@+id/button_deploy_entities_right_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_button_deploy_entities_right_menu" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_buttons4_right_menu"
+                android:layout_below="@+id/layout_buttons3_right_menu"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -903,6 +939,4 @@
         </RelativeLayout>
 
     </ScrollView>
-
-
 </android.support.v4.widget.DrawerLayout>

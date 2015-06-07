@@ -25,10 +25,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import network.server.shared.dataObjects.DroneData;
+import network.server.shared.messages.CommandMessage;
+import network.server.shared.messages.DronesMotorsSet;
 import pt.iscte.drones_swarm_mobile_app.R;
 import pt.iscte.drones_swarm_mobile_app.menu.LeftMenu;
 import pt.iscte.drones_swarm_mobile_app.menu.RightMenu;
@@ -50,6 +54,10 @@ public class MainActivity extends ActionBarActivity {
     //Control
     private int value_left_control,value_right_control = 0;
     private SeekBar seekBar_left_control1,seekBar_left_control2,seekBar_right_control1,seekBar_right_control2;
+
+    private String commandSelected = "";
+    private String configurationSelected = "";
+    private int progress_speed_limit,progress_motor_offset,progress_left_motor,progress_right_motor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +99,8 @@ public class MainActivity extends ActionBarActivity {
                                           boolean fromUser) {
                 seekBar_left_control2.setProgress(0);
                 value_left_control = progress - 100;
+                setSpinnerInfo();
+                progress_left_motor = value_left_control;
                 textView_left_control.setText("Left Control \n"+String.valueOf(value_left_control)+ "%");
 
             }
@@ -112,6 +122,8 @@ public class MainActivity extends ActionBarActivity {
                                           boolean fromUser) {
                 seekBar_left_control1.setProgress(100);
                 value_left_control = progress;
+                setSpinnerInfo();
+                progress_left_motor = value_left_control;
                 textView_left_control.setText("Left Control \n"+String.valueOf(value_left_control) + "%");
             }
 
@@ -141,6 +153,8 @@ public class MainActivity extends ActionBarActivity {
                                           boolean fromUser) {
                 seekBar_right_control2.setProgress(0);
                 value_right_control = progress - 100;
+                setSpinnerInfo();
+                progress_right_motor = value_right_control;
                 textView_right_control.setText("Right Control \n" + String.valueOf(value_right_control) + "%");
 
             }
@@ -159,6 +173,8 @@ public class MainActivity extends ActionBarActivity {
                                           boolean fromUser) {
                 seekBar_right_control1.setProgress(100);
                 value_right_control = progress;
+                setSpinnerInfo();
+                progress_right_motor = value_right_control;
                 textView_right_control.setText("Right Control \n" + String.valueOf(value_right_control) + "%");
             }
 
@@ -265,14 +281,14 @@ public class MainActivity extends ActionBarActivity {
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-    public void addMarker(final double latitude, final double longitude, final boolean isSelected) {
+    public void addMarker(final double latitude, final double longitude, final boolean isSelected, final String droneName) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if(isSelected)
-                    mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_select)).position(new LatLng(latitude, longitude)).title("Drone"));
+                    mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_select)).position(new LatLng(latitude, longitude)).title(droneName));
                 else
-                    mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(latitude, longitude)).title("Drone"));
+                    mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).position(new LatLng(latitude, longitude)).title(droneName));
 
             }
         });
@@ -306,14 +322,14 @@ public class MainActivity extends ActionBarActivity {
         mMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
     }
 
-    public void setRightMenuValues(DroneData message) {
+    public void setRightMenuValues(final List<String> values1, final List<String> values2) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 //Right Menu
                 //Seekbars speed limit and motor offset
 
-                SeekBar seekBar_speed_limit = (SeekBar)findViewById(R.id.seekbar_speed_limit_right_menu);
+                SeekBar seekBar_speed_limit = (SeekBar) findViewById(R.id.seekbar_speed_limit_right_menu);
                 final TextView speed_limit_value = (TextView) findViewById(R.id.textView_speed_limit_value);
 
                 seekBar_speed_limit.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -321,6 +337,8 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress,
                                                   boolean fromUser) {
+                        progress_speed_limit = progress;
+                        setSpinnerInfo();
                         speed_limit_value.setText(String.valueOf(progress));
                     }
 
@@ -343,7 +361,8 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress,
                                                   boolean fromUser) {
-
+                        progress_motor_offset = progress - 100;
+                        setSpinnerInfo();
                         motor_offset_value.setText(String.valueOf(progress - 100));
                     }
 
@@ -358,11 +377,14 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
                 //Commands
-                addListenerOnSpinnerItemSelectionRight_menu_commands();
+                addListenerOnSpinnerItemSelectionRight_menu_commands(values1);
+
+                //Configuration
+                addListenerOnSpinnerItemSelectionRight_menu_configuration(values2);
 
                 //Commands Caixa de texto
-                EditText editText_commands = (EditText) findViewById(R.id.editText_commands);
-                editText_commands.setText("Estou escrevendo aqui mas posso alterar para enviar comandos!");
+                final EditText editText_commands = (EditText) findViewById(R.id.editText_commands);
+                editText_commands.setText("Empty");
 
                 //Buttons
                 Button button_start_right_menu = (Button) findViewById(R.id.button_start_right_menu);
@@ -371,8 +393,13 @@ public class MainActivity extends ActionBarActivity {
                 {
                     @Override
                     public void onClick(View v) {
+                        String[] payload = {commandSelected, configurationSelected, editText_commands.getText().toString()};
+                        CommandMessage commandMessage = new CommandMessage();
+                        commandMessage.setPayload(payload);
+                        commandMessage.setMessageAction(CommandMessage.Action.START);
+                        serverHandler.sendMessage(commandMessage);
                         Toast.makeText(MainActivity.this,
-                                "Button button_start_right_menu",
+                                "Message sent",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -383,8 +410,11 @@ public class MainActivity extends ActionBarActivity {
                 {
                     @Override
                     public void onClick(View v) {
+                        CommandMessage commandMessage = new CommandMessage();
+                        commandMessage.setMessageAction(CommandMessage.Action.STOP);
+                        serverHandler.sendMessage(commandMessage);
                         Toast.makeText(MainActivity.this,
-                                "Button button_stop_right_menu",
+                                "Message sent",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -395,8 +425,11 @@ public class MainActivity extends ActionBarActivity {
                 {
                     @Override
                     public void onClick(View v) {
+                        CommandMessage commandMessage = new CommandMessage();
+                        commandMessage.setMessageAction(CommandMessage.Action.DEPLOY);
+                        serverHandler.sendMessage(commandMessage);
                         Toast.makeText(MainActivity.this,
-                                "Button button_deploy_right_menu",
+                                "Message sent",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -407,37 +440,65 @@ public class MainActivity extends ActionBarActivity {
                 {
                     @Override
                     public void onClick(View v) {
+                        CommandMessage commandMessage = new CommandMessage();
+                        commandMessage.setMessageAction(CommandMessage.Action.STOPALL);
+                        serverHandler.sendMessage(commandMessage);
                         Toast.makeText(MainActivity.this,
-                                "Button button_stop_all_right_menu",
+                                "Message sent",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-                EditText editText_buttons = (EditText) findViewById(R.id.editText_buttons);
-                editText_buttons.setText("Teste Teste Teste");
+                Button button_deploy_entities_right_menu = (Button) findViewById(R.id.button_deploy_entities_right_menu);
+                button_deploy_entities_right_menu.setOnClickListener(new View.OnClickListener()
+
+                {
+                    @Override
+                    public void onClick(View v) {
+                        CommandMessage commandMessage = new CommandMessage();
+                        commandMessage.setMessageAction(CommandMessage.Action.DEPLOYENTITIES);
+                        serverHandler.sendMessage(commandMessage);
+                        Toast.makeText(MainActivity.this,
+                                "Message sent",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                final EditText editText_buttons = (EditText) findViewById(R.id.editText_buttons);
+                editText_buttons.setText("");
                 Button button_send_log_right_menu = (Button) findViewById(R.id.button_send_log_right_menu);
                 button_send_log_right_menu.setOnClickListener(new View.OnClickListener()
 
                 {
                     @Override
                     public void onClick(View v) {
+                        String[] payload = {editText_buttons.getText().toString()};
+                        CommandMessage commandMessage = new CommandMessage();
+                        commandMessage.setPayload(payload);
+                        commandMessage.setMessageAction(CommandMessage.Action.SETLOGSTAMP);
+                        serverHandler.sendMessage(commandMessage);
                         Toast.makeText(MainActivity.this,
-                                "Button button_send_log_right_menu",
+                                "Message sent",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
     }
-
-    public void addListenerOnSpinnerItemSelectionRight_menu_commands() {
+    public void setSpinnerInfo(){
+        DronesMotorsSet dronesMotorsSet = new DronesMotorsSet();
+        dronesMotorsSet.setSpeedLimit(progress_speed_limit);
+        dronesMotorsSet.setOffset(progress_motor_offset);
+        dronesMotorsSet.setDroneIP(serverHandler.getDronesData().get(serverHandler.getSelectedDroneIndex()).getIpAddr());
+        dronesMotorsSet.setDroneName(serverHandler.getDronesData().get(serverHandler.getSelectedDroneIndex()).getName());
+        dronesMotorsSet.setLeftSpeed(progress_left_motor);
+        dronesMotorsSet.setRightSpeed(progress_right_motor);
+        serverHandler.sendMessage(dronesMotorsSet);
+    }
+    public void addListenerOnSpinnerItemSelectionRight_menu_commands(List<String> commands) {
         Spinner spinner_configure = (Spinner) findViewById(R.id.spinner_right_menu_commands);
 
-        List<String> list = new ArrayList<String>();
-        list.add("class behaviors.CalibrationCIBehavior");
-        list.add("class behaviors.Test");
-        list.add("class behaviors.TestTestTest");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(MainActivity.this,
-                R.layout.spinner_item_commands, list);
+                R.layout.spinner_item_commands, commands != null? commands : new ArrayList<String>());
         dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner_configure.setAdapter(dataAdapter);
         spinner_configure.setOnItemSelectedListener(new CustomOnItemSelectedListenerRight_menu_commands());
@@ -446,6 +507,29 @@ public class MainActivity extends ActionBarActivity {
     public class CustomOnItemSelectedListenerRight_menu_commands implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            commandSelected = parent.getItemAtPosition(pos).toString();
+            Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+
+        }
+    }
+    public void addListenerOnSpinnerItemSelectionRight_menu_configuration(List<String> commands) {
+        Spinner spinner_configure = (Spinner) findViewById(R.id.spinner_right_menu_configuration);
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(MainActivity.this,
+                R.layout.spinner_item_commands, commands != null? commands : new ArrayList<String>());
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_configure.setAdapter(dataAdapter);
+        spinner_configure.setOnItemSelectedListener(new CustomOnItemSelectedListenerRight_menu_configuration());
+    }
+
+    public class CustomOnItemSelectedListenerRight_menu_configuration implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            configurationSelected = parent.getItemAtPosition(pos).toString();
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
         }
 
@@ -472,34 +556,42 @@ public class MainActivity extends ActionBarActivity {
 
                 //Gps Data
                 TextView textView_hasfix_details_gps_data = (TextView) findViewById(R.id.textView_hasfix_details_gps_data);
-                textView_hasfix_details_gps_data.setText("Has Fix -> " + droneData.getGPSData().getFixType());
+                textView_hasfix_details_gps_data.setText("Has Fix -> " + (droneData.getGPSData().getFixType() <= 0 ? "no": "yes"));
+
+                NumberFormat formatter = new DecimalFormat("#0.00000000");
 
                 TextView textView_latitude_details_gps_data = (TextView) findViewById(R.id.textView_latitude_details_gps_data);
-                textView_latitude_details_gps_data.setText("Latitude -> " + droneData.getGPSData().getLatitude());
+                textView_latitude_details_gps_data.setText("Latitude -> " + formatter.format(droneData.getGPSData().getLatitudeDecimal()));
 
                 TextView textView_longitude_details_gps_data = (TextView) findViewById(R.id.textView_longitude_details_gps_data);
-                textView_longitude_details_gps_data.setText("Longitude -> " + droneData.getGPSData().getLongitude());
+                textView_longitude_details_gps_data.setText("Longitude -> " + formatter.format(droneData.getGPSData().getLongitudeDecimal()));
 
                 TextView textView_velocity_details_gps_data = (TextView) findViewById(R.id.textView_velocity_details_gps_data);
-                textView_velocity_details_gps_data.setText("Vel.(Km/h) -> " + droneData.getGPSData().getGroundSpeedKmh());
+                double velvalue = droneData.getGPSData().getGroundSpeedKmh();
+                textView_velocity_details_gps_data.setText("Vel.(Km/h) -> " + (velvalue >= 0 ? velvalue : ""));
 
                 TextView textView_time_details_gps_data = (TextView) findViewById(R.id.textView_time_details_gps_data);
                 textView_time_details_gps_data.setText("Time -> " + droneData.getGPSData().getDate());
 
                 TextView textView_satview_details_gps_data = (TextView) findViewById(R.id.textView_satview_details_gps_data);
-                textView_satview_details_gps_data.setText("Sat.View -> " + droneData.getGPSData().getNumberOfSatellitesInView());
+                int numSatellites = droneData.getGPSData().getNumberOfSatellitesInView();
+                textView_satview_details_gps_data.setText("Sat.View -> " + (numSatellites >= 0 ? numSatellites : ""));
 
                 TextView textView_satused_details_gps_data = (TextView) findViewById(R.id.textView_satused_details_gps_data);
-                textView_satused_details_gps_data.setText("Sat.Used -> " + droneData.getGPSData().getNumberOfSatellitesInUse());
+                int numInUse = droneData.getGPSData().getNumberOfSatellitesInUse();
+                textView_satused_details_gps_data.setText("Sat.Used -> " + (numInUse >= 0 ? numInUse : ""));
 
                 TextView textView_hdop_details_gps_data = (TextView) findViewById(R.id.textView_hdop_details_gps_data);
-                textView_hdop_details_gps_data.setText("HDOP -> " + droneData.getGPSData().getHDOP());
+                double hdop = droneData.getGPSData().getHDOP();
+                textView_hdop_details_gps_data.setText("HDOP -> " + (hdop >=0 ? hdop : ""));
 
                 TextView textView_pdop_details_gps_data = (TextView) findViewById(R.id.textView_pdop_details_gps_data);
-                textView_pdop_details_gps_data.setText("PDOP -> " + droneData.getGPSData().getPDOP());
+                double pdop = droneData.getGPSData().getPDOP();
+                textView_pdop_details_gps_data.setText("PDOP -> " + (pdop >= 0 ? pdop : ""));
 
                 TextView textView_vdop_details_gps_data = (TextView) findViewById(R.id.textView_vdop_details_gps_data);
-                textView_vdop_details_gps_data.setText("VDOP -> " + droneData.getGPSData().getVDOP());
+                double vdop = droneData.getGPSData().getVDOP();
+                textView_vdop_details_gps_data.setText("VDOP -> " + (vdop >= 0 ? vdop : ""));
 
                 //Drone Messages
                 TextView textView_drone_messages = (TextView) findViewById(R.id.textView_drone_messages);
@@ -537,10 +629,9 @@ public class MainActivity extends ActionBarActivity {
             serverHandler.setSelectedDroneIndex(pos);
             DroneData data = serverHandler.getDronesData().get(pos);
             setLeftMenuValues(data);
-            setRightMenuValues(data);
             clearMarkers();
             for (int i = 0; i < serverHandler.getDronesData().size(); i++) {
-                addMarker(serverHandler.getDronesData().get(i).getGPSData().getLatitudeDecimal(), serverHandler.getDronesData().get(i).getGPSData().getLongitudeDecimal(), i == serverHandler.getSelectedDroneIndex());
+                addMarker(serverHandler.getDronesData().get(i).getGPSData().getLatitudeDecimal(), serverHandler.getDronesData().get(i).getGPSData().getLongitudeDecimal(), i == serverHandler.getSelectedDroneIndex(), serverHandler.getDronesData().get(i).getName());
             }
 
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
