@@ -294,7 +294,7 @@ public class MainActivity extends ActionBarActivity {
         mMap.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
     }
 
-    public void setRightMenuValues(DronesInformationResponse message) {
+    public void setRightMenuValues(DroneData message) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -434,6 +434,12 @@ public class MainActivity extends ActionBarActivity {
     public class CustomOnItemSelectedListenerRight_menu_commands implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            serverHandler.setSelectedDroneIndex(pos);
+            DroneData data = serverHandler.getDronesData().get(pos);
+            setLeftMenuValues(data);
+            setRightMenuValues(data);
+            clearMarkers();
+            addMarker(data.getRobotLocation().getLatitude(), data.getRobotLocation().getLongitude());
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
         }
 
@@ -441,74 +447,70 @@ public class MainActivity extends ActionBarActivity {
         public void onNothingSelected(AdapterView<?> arg0) {
 
         }
-
     }
 
-    public void setLeftMenuValues(final DronesInformationResponse message) {
+    public void setLeftMenuValues(final DroneData droneData) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 // Set Left Menu
                 //Drones
-                addListenerOnSpinnerItemSelectionLeft_menu_drone(message);
 
                 //Battery Status
                 TextView textView_percentage1 = (TextView) findViewById(R.id.textView_percentage1);
-                textView_percentage1.setText("100%");
+                textView_percentage1.setText(/*(int)(droneData.getBatteryStatus().getCellsVoltages()[0]/4.7*100) +*/ "%");
                 TextView textView_percentage2 = (TextView) findViewById(R.id.textView_percentage2);
-                textView_percentage2.setText("95%");
+                textView_percentage2.setText(/*(int)(droneData.getBatteryStatus().getCellsVoltages()[1]/4.7*100) + */"%");
                 TextView textView_percentage3 = (TextView) findViewById(R.id.textView_percentage3);
-                textView_percentage3.setText("3%");
+                textView_percentage3.setText(/*(int)(droneData.getBatteryStatus().getCellsVoltages()[2]/4.7*100) + */"%");
 
                 //Gps Data
                 TextView textView_hasfix_details_gps_data = (TextView) findViewById(R.id.textView_hasfix_details_gps_data);
-                textView_hasfix_details_gps_data.setText("Has Fix -> " + message.dronesData.get(0).getGPSData().getFixType());
+                textView_hasfix_details_gps_data.setText("Has Fix -> " + droneData.getGPSData().getFixType());
 
                 TextView textView_latitude_details_gps_data = (TextView) findViewById(R.id.textView_latitude_details_gps_data);
-                textView_latitude_details_gps_data.setText("Latitude -> " + message.dronesData.get(0).getGPSData().getLatitude());
+                textView_latitude_details_gps_data.setText("Latitude -> " + droneData.getGPSData().getLatitude());
 
                 TextView textView_longitude_details_gps_data = (TextView) findViewById(R.id.textView_longitude_details_gps_data);
-                textView_longitude_details_gps_data.setText("Longitude -> " + message.dronesData.get(0).getGPSData().getLongitude());
+                textView_longitude_details_gps_data.setText("Longitude -> " + droneData.getGPSData().getLongitude());
 
                 TextView textView_velocity_details_gps_data = (TextView) findViewById(R.id.textView_velocity_details_gps_data);
-                textView_velocity_details_gps_data.setText("Vel.(Km/h) -> " + message.dronesData.get(0).getGPSData().getGroundSpeedKmh());
+                textView_velocity_details_gps_data.setText("Vel.(Km/h) -> " + droneData.getGPSData().getGroundSpeedKmh());
 
                 TextView textView_time_details_gps_data = (TextView) findViewById(R.id.textView_time_details_gps_data);
-                textView_time_details_gps_data.setText("Time -> " + message.dronesData.get(0).getGPSData().getDate());
+                textView_time_details_gps_data.setText("Time -> " + droneData.getGPSData().getDate());
 
                 TextView textView_satview_details_gps_data = (TextView) findViewById(R.id.textView_satview_details_gps_data);
-                textView_satview_details_gps_data.setText("Sat.View -> " + message.dronesData.get(0).getGPSData().getNumberOfSatellitesInView());
+                textView_satview_details_gps_data.setText("Sat.View -> " + droneData.getGPSData().getNumberOfSatellitesInView());
 
                 TextView textView_satused_details_gps_data = (TextView) findViewById(R.id.textView_satused_details_gps_data);
-                textView_satused_details_gps_data.setText("Sat.Used -> " + message.dronesData.get(0).getGPSData().getNumberOfSatellitesInUse());
+                textView_satused_details_gps_data.setText("Sat.Used -> " + droneData.getGPSData().getNumberOfSatellitesInUse());
 
                 TextView textView_hdop_details_gps_data = (TextView) findViewById(R.id.textView_hdop_details_gps_data);
-                textView_hdop_details_gps_data.setText("HDOP -> " + message.dronesData.get(0).getGPSData().getHDOP());
+                textView_hdop_details_gps_data.setText("HDOP -> " + droneData.getGPSData().getHDOP());
 
                 TextView textView_pdop_details_gps_data = (TextView) findViewById(R.id.textView_pdop_details_gps_data);
-                textView_pdop_details_gps_data.setText("PDOP -> " + message.dronesData.get(0).getGPSData().getPDOP());
+                textView_pdop_details_gps_data.setText("PDOP -> " + droneData.getGPSData().getPDOP());
 
                 TextView textView_vdop_details_gps_data = (TextView) findViewById(R.id.textView_vdop_details_gps_data);
-                textView_vdop_details_gps_data.setText("VDOP -> " + message.dronesData.get(0).getGPSData().getVDOP());
+                textView_vdop_details_gps_data.setText("VDOP -> " + droneData.getGPSData().getVDOP());
 
                 //Drone Messages
                 TextView textView_drone_messages = (TextView) findViewById(R.id.textView_drone_messages);
-                textView_drone_messages.setText(message.dronesData.get(0).getSystemStatusMessage());
+                textView_drone_messages.setText(droneData.getSystemStatusMessage());
             }
         });
     }
 
-    public void addListenerOnSpinnerItemSelectionLeft_menu_drone(final DronesInformationResponse message) {
+    public void addListenerOnSpinnerItemSelectionLeft_menu_drone(final ArrayList<DroneData> dronesData) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Spinner spinner_configure = (Spinner) findViewById(R.id.spinner_left_menu_drone);
 
                 List<String> list = new ArrayList<String>();
-                if(message.dronesData != null && !message.dronesData.isEmpty() && message.dronesData.get(0) == null)
-                    Log.i("MAIN-OMG", "Commit suicide");
-                if(message.dronesData != null) {
-                    for (DroneData droneData : message.dronesData)
+                if(dronesData != null) {
+                    for (DroneData droneData : dronesData)
                         if (droneData != null)
                             list.add(droneData.getName());
                         else
@@ -526,7 +528,7 @@ public class MainActivity extends ActionBarActivity {
     private class CustomOnItemSelectedListenerLeft_menu_drone implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
-            serverHandler.setSelectedDroneIdentification(serverHandler.getDronesData().get(pos).getName());
+            serverHandler.setSelectedDroneIndex(pos);
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
         }
 
@@ -543,8 +545,9 @@ public class MainActivity extends ActionBarActivity {
 
         List<String> list = new ArrayList<String>();
         list.add("0.1 Hz");
-        list.add("0.2 Hz");
-        list.add("0.3 Hz");
+        list.add("1 Hz");
+        list.add("5 Hz");
+        list.add("10 Hz");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(MainActivity.this,
                 R.layout.spinner_item, list);
         dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -561,10 +564,13 @@ public class MainActivity extends ActionBarActivity {
                     sleepMillis = 10000;
                     break;
                 case 1:
-                    sleepMillis = 20000;
+                    sleepMillis = 1000;
                     break;
                 case 2:
-                    sleepMillis = 30000;
+                    sleepMillis = 200;
+                    break;
+                case 3:
+                    sleepMillis = 100;
                     break;
             }
             serverHandler.setSleepMillis(sleepMillis);

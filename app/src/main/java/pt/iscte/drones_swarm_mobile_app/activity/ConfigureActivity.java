@@ -34,7 +34,7 @@ public class ConfigureActivity extends Activity {
     private void interactions(){
 
         final EditText editTextIP = (EditText) findViewById(R.id.editText_ip_configure_activity);
-        editTextIP.setText("192.168.3.250");
+        editTextIP.setText(ServerHandler.getServerIP());
 
         editTextIP.addTextChangedListener(new TextWatcher() {
 
@@ -55,7 +55,7 @@ public class ConfigureActivity extends Activity {
 
 
         final EditText editTextPort = (EditText) findViewById(R.id.editText_port_configure_activity);
-        editTextPort.setText("10110");
+        editTextPort.setText(ServerHandler.getPort()+"");
 
         editTextPort.addTextChangedListener(new TextWatcher() {
 

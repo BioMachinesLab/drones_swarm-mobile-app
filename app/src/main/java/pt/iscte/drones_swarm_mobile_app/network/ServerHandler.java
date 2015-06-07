@@ -48,8 +48,7 @@ public final class ServerHandler implements Runnable {
     private ObjectOutputStream oos;
     private int sleepMillis = 10000;
     private ArrayList<DroneData> dronesData;
-    private boolean requestAllDrones = false;
-    private String selectedDroneIdentification = null;
+    private int selectedDroneIndex = 0;
 
     public ServerHandler(MainActivity context) {
         this.context = context;
@@ -57,6 +56,14 @@ public final class ServerHandler implements Runnable {
 
     public static void setServerIP(String serverIP) {
         ServerHandler.serverIP = serverIP;
+    }
+
+    public static String getServerIP() {
+        return serverIP;
+    }
+
+    public static int getPort() {
+        return port;
     }
 
     public void setSleepMillis(int sleepMillis) {
@@ -114,17 +121,7 @@ public final class ServerHandler implements Runnable {
                         try {
                             Thread.sleep(sleepMillis);
                         } catch (InterruptedException e) {}
-                        if(requestAllDrones) {
-                            requestAllDrones = false;
-                            sendMessage(new DronesInformationRequest());
-                        }else if(selectedDroneIdentification == null || selectedDroneIdentification.isEmpty()){
-
-                        }else {
-                            DronesInformationRequest droneReq = new DronesInformationRequest();
-                            droneReq.addDroneIdentification(selectedDroneIdentification);
-                            sendMessage(droneReq);
-                        }
-                        sendMessage(new ServerStatusRequest());
+                        sendMessage(new DronesInformationRequest());
                     }
                 } catch (IOException e1) {
                     makeShortToastAndQuit("Connection to server lost");
@@ -149,7 +146,6 @@ public final class ServerHandler implements Runnable {
                         oos.close();
                     }catch(IOException e){}
             }
-
         } catch (Throwable e) {
             Log.i("SH-EXCEPTION-" + e.getClass().getName(), "message: " + e.getMessage());
             throw e;
@@ -163,36 +159,29 @@ public final class ServerHandler implements Runnable {
     }
 
     private void handleServerStatusResponse(ServerStatusResponse message) {
-        if(message.getServerStatusData().getConnectedClientsQty() != dronesData.size()){
-            requestAllDrones = true;
-        }
+
     }
 
     private void handleDronesInformationResponse(final DronesInformationResponse message) {
-        if(message.dronesData.size() != 1){
-            dronesData = message.dronesData;
-            //Drones
-            context.addListenerOnSpinnerItemSelectionLeft_menu_drone(message);
-
-        }
         if(!message.dronesData.isEmpty()) {
+            //Drones
+            if(dronesData == null || message.dronesData.size() != dronesData.size()){
+                selectedDroneIndex = 0;
+                context.addListenerOnSpinnerItemSelectionLeft_menu_drone(message.dronesData);
+            }
+            dronesData = message.dronesData;
             //set informacoes drone selecionado
-            context.setLeftMenuValues(message);
-            context.setRightMenuValues(message);
+            DroneData data = message.dronesData.get(selectedDroneIndex);
+            context.setLeftMenuValues(dronesData.get(selectedDroneIndex));
+            context.setRightMenuValues(dronesData.get(selectedDroneIndex));
             context.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     context.clearMarkers();
-                    context.addMarker(message.dronesData.get(0).getRobotLocation().getLatitude(), message.dronesData.get(0).getRobotLocation().getLongitude());
+                    context.addMarker(message.dronesData.get(selectedDroneIndex).getGPSData().getLatitudeDecimal(), message.dronesData.get(selectedDroneIndex).getGPSData().getLongitudeDecimal());
                 }
             });
         }
-
-    }
-
-
-    public void setSelectedDroneIdentification(String selectedDroneIdentification) {
-        this.selectedDroneIdentification = selectedDroneIdentification;
     }
 
     private void makeShortToastAndQuit(final String text) {
@@ -222,5 +211,13 @@ public final class ServerHandler implements Runnable {
 
     public ArrayList<DroneData> getDronesData() {
         return dronesData;
+    }
+
+    public void setSelectedDroneIndex(int selectedDroneIndex) {
+        this.selectedDroneIndex = selectedDroneIndex;
+    }
+
+    public int getSelectedDroneIndex() {
+        return selectedDroneIndex;
     }
 }
