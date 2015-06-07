@@ -446,15 +446,6 @@ public class MainActivity extends ActionBarActivity {
     public class CustomOnItemSelectedListenerRight_menu_commands implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
-            Log.e("POS-ID", pos+" "+id);
-            serverHandler.setSelectedDroneIndex(pos);
-            DroneData data = serverHandler.getDronesData().get(pos);
-            setLeftMenuValues(data);
-            setRightMenuValues(data);
-            clearMarkers();
-            for (int i = 0; i < serverHandler.getDronesData().size(); i++) {
-                addMarker(serverHandler.getDronesData().get(i).getGPSData().getLatitudeDecimal(), serverHandler.getDronesData().get(i).getGPSData().getLongitudeDecimal(), i == serverHandler.getSelectedDroneIndex());
-            }
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
         }
 
@@ -544,6 +535,14 @@ public class MainActivity extends ActionBarActivity {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
             serverHandler.setSelectedDroneIndex(pos);
+            DroneData data = serverHandler.getDronesData().get(pos);
+            setLeftMenuValues(data);
+            setRightMenuValues(data);
+            clearMarkers();
+            for (int i = 0; i < serverHandler.getDronesData().size(); i++) {
+                addMarker(serverHandler.getDronesData().get(i).getGPSData().getLatitudeDecimal(), serverHandler.getDronesData().get(i).getGPSData().getLongitudeDecimal(), i == serverHandler.getSelectedDroneIndex());
+            }
+
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
         }
 
