@@ -452,7 +452,7 @@ public class MainActivity extends ActionBarActivity {
             setRightMenuValues(data);
             clearMarkers();
             for (int i = 0; i < serverHandler.getDronesData().size(); i++) {
-                addMarker(data.getGPSData().getLatitudeDecimal(), data.getGPSData().getLongitudeDecimal(), i == serverHandler.getSelectedDroneIndex());
+                addMarker(serverHandler.getDronesData().get(i).getGPSData().getLatitudeDecimal(), serverHandler.getDronesData().get(i).getGPSData().getLongitudeDecimal(), i == serverHandler.getSelectedDroneIndex());
             }
             Log.i("MENU", "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString());
         }

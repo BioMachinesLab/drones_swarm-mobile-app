@@ -183,7 +183,6 @@ public final class ServerHandler implements Runnable {
                     for (int i = 0; i < message.dronesData.size(); i++) {
                         context.addMarker(message.dronesData.get(i).getGPSData().getLatitudeDecimal(), message.dronesData.get(i).getGPSData().getLongitudeDecimal(), i == selectedDroneIndex);
                     }
-
                 }
             });
             if(newList)
